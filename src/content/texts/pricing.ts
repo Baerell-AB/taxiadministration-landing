@@ -28,7 +28,7 @@ export const tiers = [
     ],
     cta: {
       text: 'Kom igång gratis',
-      href: 'https://app.taxiadministration.se',
+      href: 'https://app.taxiadministration.se/login',
     },
     highlighted: false,
   },
@@ -47,7 +47,7 @@ export const tiers = [
     ],
     cta: {
       text: 'Testa gratis',
-      href: 'https://app.taxiadministration.se',
+      href: 'https://app.taxiadministration.se/login',
     },
     highlighted: true,
   },

@@ -10,7 +10,7 @@ export const hero = {
   buttons: {
     primary: {
       text: 'Kom igång gratis',
-      href: 'https://app.taxiadministration.se',
+      href: 'https://app.taxiadministration.se/login',
     },
     secondary: {
       text: 'Se demo',

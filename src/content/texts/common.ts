@@ -8,7 +8,7 @@ export const navigation = {
   ],
   login: 'Logga in',
   tryFree: 'Testa gratis',
-  appUrl: 'https://app.taxiadministration.se',
+  appUrl: 'https://app.taxiadministration.se/login',
 };
 
 export const footer = {
@@ -54,7 +54,7 @@ export const cta = {
   buttons: {
     primary: {
       text: 'Starta Nu - Helt Gratis',
-      href: 'https://app.taxiadministration.se',
+      href: 'https://app.taxiadministration.se/login',
     },
     secondary: {
       text: 'Kontakta oss',
