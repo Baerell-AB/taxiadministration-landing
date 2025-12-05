@@ -1,22 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import logoSrc from '../assets/tk-logga.png';
+import { common } from '../content/texts';
 
-const produktLinks = [
-  { name: 'Funktioner', href: '/#funktioner' },
-  { name: 'Priser', href: '/priser' },
-  { name: 'Partners', href: '/partners' },
-];
-
-const supportLinks = [
-  { name: 'Vanliga frågor', href: '/#faq' },
-  { name: 'Kontakt', href: '/kontakt' },
-];
-
-const legalLinks = [
-  { name: 'Integritetspolicy', href: '/integritetspolicy' },
-  { name: 'Användarvillkor', href: '/anvandarvillkor' },
-];
+const produktLinks = common.footer.product.links;
+const supportLinks = common.footer.support.links;
+const legalLinks = common.footer.legal.links;
 ---
 
 <footer class="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden">
@@ -35,11 +24,11 @@ const legalLinks = [
           <Image src={logoSrc} alt="Taxi Administration logotyp" width={120} height={40} />
         </a>
         <p class="mt-4 text-gray-400 max-w-md">
-          Automatisera dina löneberäkningar med precision för taxi- och transportföretag. Utvecklat specifikt för svenska skatteregler och regelverket.
+          {common.footer.description}
         </p>
         <div class="mt-6 flex space-x-4">
           <a
-            href="https://www.linkedin.com/company/baerell/"
+            href={common.footer.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
             class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
@@ -53,7 +42,7 @@ const legalLinks = [
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">Produkten</h3>
+        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">{common.footer.product.title}</h3>
         <ul class="space-y-3">
           {produktLinks.map((link, index) => (
             <li class="transform transition-all duration-300 hover:translate-x-1">
@@ -70,7 +59,7 @@ const legalLinks = [
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">Support</h3>
+        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">{common.footer.support.title}</h3>
         <ul class="space-y-3">
           {supportLinks.map((link, index) => (
             <li class="transform transition-all duration-300 hover:translate-x-1">
@@ -87,7 +76,7 @@ const legalLinks = [
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">Juridiskt</h3>
+        <h3 class="text-lg font-semibold mb-4 text-white/90 hover:text-white transition-colors duration-300">{common.footer.legal.title}</h3>
         <ul class="space-y-3">
           {legalLinks.map((link, index) => (
             <li class="transform transition-all duration-300 hover:translate-x-1">
@@ -105,8 +94,8 @@ const legalLinks = [
     </div>
 
     <div class="pt-8 text-center text-gray-400 text-sm space-y-2">
-      <p class="hover:text-gray-300 transition-colors duration-300">&copy; {new Date().getFullYear()} taxiadministration.se. Alla rättigheter förbehållna.</p>
-      <p class="text-gray-500">Utvecklat av Baerell AB | Stockholm, Sverige</p>
+      <p class="hover:text-gray-300 transition-colors duration-300">{common.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
+      <p class="text-gray-500">{common.footer.developedBy}</p>
     </div>
   </div>
 </footer>

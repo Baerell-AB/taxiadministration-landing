@@ -2,27 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import Breadcrumb from '../components/Breadcrumb.astro';
-
-const breadcrumbItems = [
-  { name: "Hem", url: "https://taxiadministration.se/" },
-  { name: "Kontakt", url: "https://taxiadministration.se/kontakt/" }
-];
+import { contact } from '../content/texts';
 ---
 
 <Layout
-  title="Kontakta oss - Support för taxiåkerier | Taxi Administration"
-  description="Kontakta taxiadministration.se för frågor om lönehantering för taxiåkerier. Vi svarar inom 24 timmar."
+  title={contact.seo.title}
+  description={contact.seo.description}
 >
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
-      <Breadcrumb items={breadcrumbItems} />
+      <Breadcrumb items={contact.header.breadcrumbs} />
       <div class="text-center max-w-3xl mx-auto animate-on-scroll">
         <h1 class="text-4xl md:text-5xl font-bold leading-tight">
           Kontakta <span class="gradient-text">oss</span>
         </h1>
         <p class="mt-6 text-xl text-gray-600">
-          Har du frågor om vårt system? Vi hjälper dig gärna.
-          Fyll i formuläret så återkommer vi inom 24 timmar.
+          {contact.header.subtitle}
         </p>
       </div>
     </div>
@@ -34,49 +29,49 @@ const breadcrumbItems = [
         <!-- Contact Info -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 animate-on-scroll">
-            <h2 class="text-2xl font-bold mb-6">Hitta oss</h2>
+            <h2 class="text-2xl font-bold mb-6">{contact.contactInfo.title}</h2>
 
             <div class="space-y-6">
               <div class="flex items-start">
                 <div class="flex-shrink-0 h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
-                  <Icon name="ph:buildings-duotone" class="h-5 w-5" />
+                  <Icon name={contact.contactInfo.company.icon} class="h-5 w-5" />
                 </div>
                 <div class="ml-4">
-                  <p class="font-semibold text-gray-900">Företag</p>
-                  <p class="text-gray-600">Baerell AB</p>
+                  <p class="font-semibold text-gray-900">{contact.contactInfo.company.label}</p>
+                  <p class="text-gray-600">{contact.contactInfo.company.value}</p>
                 </div>
               </div>
 
               <div class="flex items-start">
                 <div class="flex-shrink-0 h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
-                  <Icon name="ph:globe-duotone" class="h-5 w-5" />
+                  <Icon name={contact.contactInfo.location.icon} class="h-5 w-5" />
                 </div>
                 <div class="ml-4">
-                  <p class="font-semibold text-gray-900">Plats</p>
-                  <p class="text-gray-600">Stockholm, Sverige</p>
+                  <p class="font-semibold text-gray-900">{contact.contactInfo.location.label}</p>
+                  <p class="text-gray-600">{contact.contactInfo.location.value}</p>
                 </div>
               </div>
 
               <div class="flex items-start">
                 <div class="flex-shrink-0 h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
-                  <Icon name="ph:clock-duotone" class="h-5 w-5" />
+                  <Icon name={contact.contactInfo.responseTime.icon} class="h-5 w-5" />
                 </div>
                 <div class="ml-4">
-                  <p class="font-semibold text-gray-900">Svarstid</p>
-                  <p class="text-gray-600">Inom 24 timmar</p>
+                  <p class="font-semibold text-gray-900">{contact.contactInfo.responseTime.label}</p>
+                  <p class="text-gray-600">{contact.contactInfo.responseTime.value}</p>
                 </div>
               </div>
             </div>
 
             <div class="mt-8 pt-6 border-t border-gray-100">
               <a
-                href="https://www.linkedin.com/company/baerell/"
+                href={contact.contactInfo.linkedInUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center text-blue-600 hover:underline"
               >
-                <Icon name="ph:linkedin-logo-duotone" class="h-5 w-5 mr-2" />
-                Följ oss på LinkedIn
+                <Icon name={contact.contactInfo.linkedInIcon} class="h-5 w-5 mr-2" />
+                {contact.contactInfo.linkedInText}
               </a>
             </div>
           </div>
@@ -86,39 +81,39 @@ const breadcrumbItems = [
         <div class="lg:col-span-2">
           <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden animate-on-scroll delay-1">
             <div class="p-8 md:p-12">
-              <h2 class="text-2xl font-bold mb-6">Skicka ett meddelande</h2>
+              <h2 class="text-2xl font-bold mb-6">{contact.form.title}</h2>
               <form
-                action="https://formspree.io/f/xldwykeg"
+                action={contact.form.action}
                 method="POST"
                 class="space-y-6"
               >
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label for="name" class="block text-gray-700 font-medium mb-2">Namn</label>
+                    <label for="name" class="block text-gray-700 font-medium mb-2">{contact.form.fields.name.label}</label>
                     <input
-                      type="text"
+                      type={contact.form.fields.name.type}
                       id="name"
                       name="name"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
-                      required
+                      required={contact.form.fields.name.required}
                     />
                   </div>
                   <div>
-                    <label for="email" class="block text-gray-700 font-medium mb-2">E-post</label>
+                    <label for="email" class="block text-gray-700 font-medium mb-2">{contact.form.fields.email.label}</label>
                     <input
-                      type="email"
+                      type={contact.form.fields.email.type}
                       id="email"
                       name="email"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
-                      required
+                      required={contact.form.fields.email.required}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label for="company" class="block text-gray-700 font-medium mb-2">Företag / Åkeri</label>
+                  <label for="company" class="block text-gray-700 font-medium mb-2">{contact.form.fields.company.label}</label>
                   <input
-                    type="text"
+                    type={contact.form.fields.company.type}
                     id="company"
                     name="company"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
@@ -126,29 +121,27 @@ const breadcrumbItems = [
                 </div>
 
                 <div>
-                  <label for="subject" class="block text-gray-700 font-medium mb-2">Ämne</label>
+                  <label for="subject" class="block text-gray-700 font-medium mb-2">{contact.form.fields.subject.label}</label>
                   <select
                     id="subject"
                     name="subject"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
-                    required
+                    required={contact.form.fields.subject.required}
                   >
-                    <option value="" disabled selected>Välj ett alternativ</option>
-                    <option value="Fråga om systemet">Fråga om systemet</option>
-                    <option value="Prisförfrågan">Prisförfrågan</option>
-                    <option value="Teknisk support">Teknisk support</option>
-                    <option value="Övrigt">Övrigt</option>
+                    {contact.form.fields.subject.options.map(option => (
+                      <option value={option.value} disabled={option.disabled}>{option.label}</option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label for="message" class="block text-gray-700 font-medium mb-2">Meddelande</label>
+                  <label for="message" class="block text-gray-700 font-medium mb-2">{contact.form.fields.message.label}</label>
                   <textarea
                     id="message"
                     name="message"
-                    rows="5"
+                    rows={contact.form.fields.message.rows}
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
-                    required
+                    required={contact.form.fields.message.required}
                   ></textarea>
                 </div>
 
@@ -157,7 +150,7 @@ const breadcrumbItems = [
                     type="submit"
                     class="btn btn-primary w-full md:w-auto"
                   >
-                    Skicka meddelande
+                    {contact.form.submitButton}
                   </button>
                 </div>
               </form>
@@ -172,12 +165,12 @@ const breadcrumbItems = [
   <section class="py-16">
     <div class="container-custom">
       <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-        <h2 class="text-2xl font-bold mb-4">Vanliga frågor</h2>
+        <h2 class="text-2xl font-bold mb-4">{contact.faqTeaser.title}</h2>
         <p class="text-gray-600 mb-6">
-          Kolla in vår FAQ för snabba svar på de vanligaste frågorna.
+          {contact.faqTeaser.subtitle}
         </p>
-        <a href="/#faq" class="btn btn-secondary">
-          Till vanliga frågor
+        <a href={contact.faqTeaser.buttonLink} class="btn btn-secondary">
+          {contact.faqTeaser.buttonText}
         </a>
       </div>
     </div>

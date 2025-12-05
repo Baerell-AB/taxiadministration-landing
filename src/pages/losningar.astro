@@ -7,89 +7,27 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import salaryReport from '../assets/salaryReport.png';
 import driverReport from '../assets/driverReport.png';
 import configuration from '../assets/configuration.png';
+import { solutions } from '../content/texts';
 
-const breadcrumbItems = [
-  { name: "Hem", url: "https://taxiadministration.se/" },
-  { name: "Lösningar", url: "https://taxiadministration.se/losningar/" }
-];
-
-// VideoObject schema for SEO
-const videoSchema = {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": "Taxi Administration Demo - Lönehantering för taxiåkerier",
-  "description": "Se hur taxiadministration.se automatiserar löneberäkningar för taxiåkerier. Stöd för Bolt, Uber, SumUp och fler.",
-  "thumbnailUrl": "https://img.youtube.com/vi/Iu3Cqa4QBL8/maxresdefault.jpg",
-  "uploadDate": "2024-01-01",
-  "contentUrl": "https://www.youtube.com/watch?v=Iu3Cqa4QBL8",
-  "embedUrl": "https://www.youtube.com/embed/Iu3Cqa4QBL8",
-  "duration": "PT3M",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Taxi Administration",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://taxiadministration.se/favicon.png"
-    }
-  }
-};
-
-const solutions = [
-  {
-    title: "Lönehantering",
-    description: "Automatisera hela löneprocessen från intäktssammanställning till färdiga lönespecifikationer. Systemet beräknar provision, moms, arbetsgivaravgifter och semesterersättning enligt dina villkor.",
-    icon: "ph:currency-dollar-duotone",
-    image: salaryReport,
-    features: [
-      "Automatisk beräkning av provision och delning",
-      "Stöd för olika lönemodeller",
-      "Beräkning av arbetsgivaravgifter",
-      "Semesterersättning enligt lag"
-    ]
-  },
-  {
-    title: "Förarrapporter",
-    description: "Få full överblick över varje förares körningar och intäkter. Detaljerade rapporter som visar körningar per plattform, totala intäkter och beräknad lön.",
-    icon: "ph:users-duotone",
-    image: driverReport,
-    features: [
-      "Individuella förarrapporter",
-      "Sammanställning per plattform",
-      "Historik och trender",
-      "Exportera till PDF eller Excel"
-    ]
-  },
-  {
-    title: "Flexibel Konfiguration",
-    description: "Anpassa systemet efter ditt åkeris specifika behov. Ställ in delningsmodeller, provisionsstrukturer och beräkningsregler som matchar era avtal.",
-    icon: "ph:layout-duotone",
-    image: configuration,
-    features: [
-      "Anpassningsbara delningsmodeller",
-      "Egna provisionsstrukturer",
-      "Hantering av flera plattformar",
-      "Egna beräkningsregler"
-    ]
-  }
-];
+const imageMap = { salaryReport, driverReport, configuration };
+const solutionsList = solutions.solutions.map(s => ({ ...s, image: imageMap[s.image as keyof typeof imageMap] }));
 ---
 
 <Layout
-  title="Smarta lösningar för taxi revision och administration | Taxi Administration"
-  description="Komplett lönehantering, förarrapporter och revisionsunderlag för taxiåkerier. Se demo och kom igång gratis."
+  title={solutions.seo.title}
+  description={solutions.seo.description}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(solutions.video.videoSchema)} />
 
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
-      <Breadcrumb items={breadcrumbItems} />
+      <Breadcrumb items={solutions.header.breadcrumbs} />
       <div class="text-center max-w-4xl mx-auto">
         <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
-          Smarta lösningar för <span class="gradient-text">taxi revision</span> och administration
+          {solutions.header.title}
         </h1>
         <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
-          Komplett lönehantering, förarrapporter och revisionsunderlag för taxiåkerier.
-          Utvecklat för svenska förhållanden och skatteregler.
+          {solutions.header.subtitle}
         </p>
       </div>
     </div>
@@ -100,13 +38,13 @@ const solutions = [
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 animate-on-scroll">
-          Se hur det fungerar
+          {solutions.demo.title}
         </h2>
         <div class="animate-on-scroll delay-1 aspect-video rounded-xl overflow-hidden shadow-xl">
           <iframe
             class="w-full h-full"
-            src="https://www.youtube.com/embed/Iu3Cqa4QBL8"
-            title="Taxi Administration Demo"
+            src={`https://www.youtube.com/embed/${solutions.demo.videoId}`}
+            title={solutions.demo.description}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -119,7 +57,7 @@ const solutions = [
   <!-- Solutions Grid -->
   <section class="py-20">
     <div class="container-custom">
-      {solutions.map((solution, index) => (
+      {solutionsList.map((solution, index) => (
         <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 last:mb-0 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
           <div class={`animate-on-scroll delay-${index}`}>
             <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white mb-6">
@@ -159,24 +97,17 @@ const solutions = [
   <section class="py-16 bg-gray-50">
     <div class="container-custom">
       <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-        <h2 class="text-3xl font-bold">Stöd för alla stora plattformar</h2>
+        <h2 class="text-3xl font-bold">{solutions.platforms.title}</h2>
         <p class="mt-4 text-lg text-gray-600">
-          Importera enkelt data från de plattformar du använder idag.
+          {solutions.platforms.subtitle}
         </p>
       </div>
       <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-1">
-          <span class="text-xl font-semibold text-gray-800">Bolt</span>
-        </div>
-        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-2">
-          <span class="text-xl font-semibold text-gray-800">Uber</span>
-        </div>
-        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-3">
-          <span class="text-xl font-semibold text-gray-800">SumUp</span>
-        </div>
-        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-4">
-          <span class="text-xl font-semibold text-gray-800">Fler snart</span>
-        </div>
+        {solutions.platforms.list.map((platform, index) => (
+          <div class={`bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-${index + 1}`}>
+            <span class="text-xl font-semibold text-gray-800">{platform}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>

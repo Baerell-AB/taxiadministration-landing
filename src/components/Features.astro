@@ -4,27 +4,10 @@ import { Icon } from 'astro-icon/components';
 import featureImage1 from '../assets/configuration.png';
 import featureImage2 from '../assets/driverReport.png';
 import featureImage3 from '../assets/salaryReport.png';
+import { home } from '../content/texts';
 
-const features = [
-  {
-    title: "Automatiserade Beräkningar",
-    description: "Automatiserade och enkla löneberäkningar enligt dina villkor. Spara timmar varje månad med korrekt beräkning av provision, moms och arbetsgivaravgifter.",
-    icon: "ph:currency-dollar-duotone",
-    image: featureImage3,
-  },
-  {
-    title: "Professionell Rapportering",
-    description: "Generera PDF-rapporter för löneunderlag och redovisning. Exportera till Excel för bokföring eller skicka direkt till din revisor.",
-    icon: "ph:file-search",
-    image: featureImage2,
-  },
-  {
-    title: "Tidsbesparande Automation",
-    description: "Reducera administrativ tid med upp till 90% genom automatiska beräkningar. Importera data från Bolt, Uber, SumUp och fler med några klick.",
-    icon: "ph:clock-duotone",
-    image: featureImage1,
-  },
-];
+const imageMap = { salaryReport: featureImage3, driverReport: featureImage2, configuration: featureImage1 };
+const features = home.features.map(f => ({ ...f, image: imageMap[f.image as keyof typeof imageMap] }));
 ---
 
 <section id="funktioner" class="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
@@ -36,10 +19,10 @@ const features = [
   <div class="container-custom relative">
     <div class="text-center max-w-3xl mx-auto">
       <h2 class="animate-on-scroll delay-0 text-3xl md:text-4xl font-bold">
-        Varför välja vårt system?
+        {home.featuresSection.title}
       </h2>
       <p class="animate-on-scroll delay-1 mt-4 text-xl text-gray-600">
-        Utvecklat specifikt för svenska taxi- och transportföretag med fokus på automatisering och regelefterlevnad.
+        {home.featuresSection.subtitle}
       </p>
     </div>
 

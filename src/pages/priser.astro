@@ -3,94 +3,23 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import CTASection from '../components/CTASection.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import { pricing } from '../content/texts';
 
-const breadcrumbItems = [
-  { name: "Hem", url: "https://taxiadministration.se/" },
-  { name: "Priser", url: "https://taxiadministration.se/priser/" }
-];
-
-const tiers = [
-  {
-    name: "Gratis",
-    price: "0",
-    period: "kr/mån",
-    description: "Perfekt för att komma igång och testa systemet.",
-    features: [
-      "1 förare",
-      "Grundläggande löneberäkningar",
-      "PDF-rapporter",
-      "E-postsupport",
-      "Import från alla plattformar"
-    ],
-    cta: {
-      text: "Kom igång gratis",
-      href: "https://app.taxiadministration.se"
-    },
-    highlighted: false
-  },
-  {
-    name: "Standard",
-    price: "499",
-    period: "kr/mån",
-    description: "För småföretag och växande åkerier.",
-    features: [
-      "Upp till 10 förare",
-      "Alla beräkningsfunktioner",
-      "Avancerade rapporter",
-      "Excel-export",
-      "Prioriterad support",
-      "Anpassningsbara lönemodeller"
-    ],
-    cta: {
-      text: "Testa gratis",
-      href: "https://app.taxiadministration.se"
-    },
-    highlighted: true
-  }
-];
-
-const enterpriseFeatures = [
-  "Obegränsat antal förare",
-  "Dedikerad kontaktperson",
-  "Anpassad integration",
-  "Skräddarsydda rapporter",
-  "Onboarding-hjälp",
-  "SLA-garanti"
-];
-
-const faqs = [
-  {
-    question: "Kan jag byta plan när som helst?",
-    answer: "Ja, du kan uppgradera eller nedgradera din plan när som helst. Ändringen träder i kraft direkt och du betalar bara för det du använder."
-  },
-  {
-    question: "Finns det någon bindningstid?",
-    answer: "Nej, det finns ingen bindningstid. Du kan säga upp din prenumeration när som helst och fortsätta använda tjänsten fram till slutet av din faktureringsperiod."
-  },
-  {
-    question: "Hur fungerar den kostnadsfria planen?",
-    answer: "Den kostnadsfria planen ger dig tillgång till grundläggande funktioner för 1 förare. Du kan använda den så länge du vill utan kostnad."
-  },
-  {
-    question: "Vad händer om jag har fler än 10 förare?",
-    answer: "För åkerier med fler än 10 förare erbjuder vi Enterprise-planen med skräddarsydd prissättning. Kontakta oss för en offert."
-  }
-];
 ---
 
 <Layout
-  title="Prisvärd taxi bokföring - börja gratis | Taxi Administration"
-  description="Flexibla priser för taxiåkerier. Börja gratis med 1 förare. Uppgradera när du växer. Ingen bindningstid."
+  title={pricing.seo.title}
+  description={pricing.seo.description}
 >
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
-      <Breadcrumb items={breadcrumbItems} />
+      <Breadcrumb items={pricing.header.breadcrumbs} />
       <div class="text-center max-w-3xl mx-auto">
         <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
-          Prisvärd <span class="gradient-text">taxi bokföring</span> - börja gratis
+          {pricing.header.title}
         </h1>
         <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
-          Flexibla priser som växer med ditt åkeri. Ingen bindningstid, inga dolda avgifter.
+          {pricing.header.subtitle}
         </p>
       </div>
     </div>
@@ -99,7 +28,7 @@ const faqs = [
   <section class="py-20 bg-gray-50">
     <div class="container-custom">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {tiers.map((tier, index) => (
+        {pricing.tiers.map((tier, index) => (
           <div class={`bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 relative animate-on-scroll delay-${index + 1} ${tier.highlighted ? 'ring-2 ring-blue-600' : ''}`}>
             {tier.highlighted && (
               <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
@@ -130,15 +59,15 @@ const faqs = [
 
         <!-- Enterprise Tier -->
         <div class="bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl p-8 text-white animate-on-scroll delay-3">
-          <h3 class="text-2xl font-semibold">Enterprise</h3>
+          <h3 class="text-2xl font-semibold">{pricing.enterprise.name}</h3>
           <div class="mt-4">
-            <span class="text-2xl font-medium">Kontakta oss</span>
+            <span class="text-2xl font-medium">{pricing.enterprise.label}</span>
           </div>
           <p class="mt-4 text-white/90">
-            För större åkerier med 10+ förare och särskilda behov.
+            {pricing.enterprise.description}
           </p>
           <ul class="mt-8 space-y-4">
-            {enterpriseFeatures.map(feature => (
+            {pricing.enterprise.features.map(feature => (
               <li class="flex items-center">
                 <Icon name="ph:check-circle-duotone" class="h-5 w-5 text-white mr-2 flex-shrink-0" />
                 {feature}
@@ -146,8 +75,8 @@ const faqs = [
             ))}
           </ul>
           <div class="mt-8">
-            <a href="/kontakt" class="btn bg-white text-blue-600 hover:bg-white/90 w-full text-center">
-              Kontakta försäljning
+            <a href={pricing.enterprise.cta.href} class="btn bg-white text-blue-600 hover:bg-white/90 w-full text-center">
+              {pricing.enterprise.cta.text}
             </a>
           </div>
         </div>
@@ -160,12 +89,12 @@ const faqs = [
     <div class="container-custom">
       <div class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
         <h2 class="text-3xl md:text-4xl font-bold">
-          Vanliga frågor om priser
+          {pricing.pricingFaqSection.title}
         </h2>
       </div>
 
       <div class="max-w-3xl mx-auto">
-        {faqs.map((faq, index) => (
+        {pricing.pricingFaqs.map((faq, index) => (
           <div
             class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden animate-on-scroll hover:shadow-md transition-all duration-300"
             style={`animation-delay: ${index * 0.1}s`}

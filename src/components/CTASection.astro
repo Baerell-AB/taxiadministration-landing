@@ -1,4 +1,5 @@
 ---
+import { common } from '../content/texts';
 ---
 
 <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-500 text-white relative overflow-hidden">
@@ -12,37 +13,27 @@
   <div class="container-custom relative">
     <div class="max-w-3xl mx-auto text-center animate-on-scroll">
       <h2 class="text-3xl md:text-4xl font-bold">
-        Redo att komma igång?
+        {common.cta.title}
       </h2>
       <p class="mt-6 text-xl opacity-90">
-        Gå med moderna taxi- och transportföretag som redan sparat hundratals timmar med automatiserad lönehantering.
+        {common.cta.subtitle}
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm opacity-80">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span>Ingen installation</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span>Ingen bindningstid</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span>Support på svenska</span>
-        </div>
+        {common.cta.benefits.map((benefit) => (
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>{benefit}</span>
+          </div>
+        ))}
       </div>
       <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="https://app.taxiadministration.se" class="btn bg-white text-blue-600 hover:bg-opacity-90 transform transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
-          Starta Nu - Helt Gratis
+        <a href={common.cta.buttons.primary.href} class="btn bg-white text-blue-600 hover:bg-opacity-90 transform transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
+          {common.cta.buttons.primary.text}
         </a>
-        <a href="/kontakt" class="btn border border-white hover:bg-white/20 transform transition-all duration-300 hover:scale-105">
-          Kontakta oss
+        <a href={common.cta.buttons.secondary.href} class="btn border border-white hover:bg-white/20 transform transition-all duration-300 hover:scale-105">
+          {common.cta.buttons.secondary.text}
         </a>
       </div>
     </div>

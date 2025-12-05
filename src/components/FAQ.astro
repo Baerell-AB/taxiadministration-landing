@@ -1,37 +1,18 @@
 ---
-const faqs = [
-  {
-    question: "Vilka plattformar stöder ni och hur lätt är det att komma igång?",
-    answer: "Vi stöder Bolt, Uber, SumUp och många fler plattformar snart. Du laddar enkelt upp CSV-filer från plattformarna eller matar in data manuellt. Uppsättning tar mindre än 10 minuter och du kan börja beräkna löner direkt."
-  },
-  {
-    question: "Kan jag få ut löneunderlag för redovisning?",
-    answer: "Ja, taxiadministration.se genererar professionella PDF-rapporter som passar direkt för redovisning och lönespecifikationer. Du kan exportera detaljerade rapporter per förare med all information som behövs för bokföring, inklusive moms, arbetsgivaravgifter och semesterersättning."
-  },
-  {
-    question: "Vilken support ingår och hur snabbt får jag hjälp?",
-    answer: "Vi erbjuder e-postsupport med snabba svar. Kontakta oss via formuläret på kontaktsidan så hjälper vi dig. Systemet är dessutom enkelt och intuitivt att använda, så de flesta kommer igång utan att behöva support."
-  },
-  {
-    question: "Kan systemet hantera våra specifika lönemodeller?",
-    answer: "Ja, taxiadministration.se är byggt för svensk taxi- och transportbransch med stöd för olika delningsmodeller mellan åkeri och förare. Du kan konfigurera provisionsstrukturer, hantera moms och beräkna arbetsgivaravgifter enligt svenska regler. Systemet anpassar sig efter dina specifika avtal."
-  },
-  {
-    question: "Hur fungerar prissättningen?",
-    answer: "Du kan börja helt gratis med 1 förare för att testa systemet. Uppgradera till Standard för 499 kr/mån för upp till 10 förare. Större åkerier får skräddarsydd offert baserat på antal förare. Ingen bindningstid och inga dolda avgifter - du betalar bara för det du använder."
-  }
-];
+import { faq } from '../content/texts';
+
+const faqs = faq.faqs;
 
 // Generate FAQPage schema for SEO
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map(faqItem => ({
     "@type": "Question",
-    "name": faq.question,
+    "name": faqItem.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": faq.answer
+      "text": faqItem.answer
     }
   }))
 };
@@ -48,30 +29,30 @@ const faqSchema = {
   <div class="container-custom relative">
     <div class="text-center max-w-3xl mx-auto animate-on-scroll">
       <h2 class="text-3xl md:text-4xl font-bold">
-        Få svar på dina <span class="gradient-text">frågor</span>
+        {faq.section.title} <span class="gradient-text">frågor</span>
       </h2>
       <p class="mt-4 text-xl text-gray-600">
-        Här hittar du svar på de vanligaste frågorna om vår lönehantering för taxiåkerier.
+        {faq.section.subtitle}
       </p>
     </div>
 
     <div class="mt-12 max-w-3xl mx-auto">
-      {faqs.map((faq, index) => (
+      {faqs.map((faqItem, index) => (
         <div
           class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden animate-on-scroll faq-item hover:shadow-md transition-all duration-300"
           style={`animation-delay: ${index * 0.1}s`}
         >
           <details class="group">
             <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50">
-              <h3 class="text-lg font-medium transition-colors duration-300 group-hover:text-blue-600 pr-4">{faq.question}</h3>
+              <h3 class="text-lg font-medium transition-colors duration-300 group-hover:text-blue-600 pr-4">{faqItem.question}</h3>
               <div class="flex-shrink-0 ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
             </summary>
-            <div class="px-6 pb-6 text-gray-600 faq-content">
-              <p>{faq.answer}</p>
+            <div class="px-6 pb-6 text-gray-600">
+              <p>{faqItem.answer}</p>
             </div>
           </details>
         </div>
@@ -80,10 +61,10 @@ const faqSchema = {
 
     <div class="mt-12 text-center animate-on-scroll">
       <p class="text-gray-600">
-        Har du fler frågor? Vi hjälper dig gärna.
+        {faq.section.contactText}
       </p>
-      <a href="/kontakt" class="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline group">
-        Kontakta oss
+      <a href={faq.section.contactLink.href} class="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline group">
+        {faq.section.contactLink.text}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>

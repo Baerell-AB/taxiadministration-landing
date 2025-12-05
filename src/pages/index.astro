@@ -6,14 +6,15 @@ import CTASection from '../components/CTASection.astro';
 import FAQ from '../components/FAQ.astro';
 import { getImage } from 'astro:assets';
 import heroImage from '../assets/salaryReport.png';
+import { home } from '../content/texts';
 
 // Get optimized hero image for preloading
 const optimizedHero = await getImage({ src: heroImage, width: 700 });
 ---
 
 <Layout
-  title="Bokföring och lönehantering för taxiåkerier | Taxi Administration"
-  description="Automatisera löneberäkningar för ditt taxiåkeri. Stöd för Bolt, Uber, SumUp och fler. Börja gratis."
+  title={home.seo.title}
+  description={home.seo.description}
   preloadImage={optimizedHero.src}
 >
   <Hero />

@@ -1,13 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import logoSrc from '../assets/tk-logga.png';
+import { common } from '../content/texts';
 
-const navItems = [
-  { name: 'Funktioner', href: '/#funktioner' },
-  { name: 'Lösningar', href: '/losningar' },
-  { name: 'Priser', href: '/priser' },
-  { name: 'Om oss', href: '/om-oss' },
-];
+const navItems = common.navigation.items;
 ---
 
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100" role="banner">
@@ -29,10 +25,10 @@ const navItems = [
     </nav>
 
     <div class="flex items-center space-x-4">
-      <a href="https://app.taxiadministration.se" class="hidden md:inline-block text-gray-900 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1">
-        Logga in
+      <a href={common.navigation.appUrl} class="hidden md:inline-block text-gray-900 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1">
+        {common.navigation.login}
       </a>
-      <a href="https://app.taxiadministration.se" class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Testa gratis</a>
+      <a href={common.navigation.appUrl} class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">{common.navigation.tryFree}</a>
 
       <!-- Mobile Menu Button -->
       <button
@@ -61,8 +57,8 @@ const navItems = [
           {item.name}
         </a>
       ))}
-      <a href="https://app.taxiadministration.se" class="block py-2 px-2 text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded">Logga in</a>
-      <a href="https://app.taxiadministration.se" class="btn btn-primary w-full text-center mt-4">Testa gratis</a>
+      <a href={common.navigation.appUrl} class="block py-2 px-2 text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded">{common.navigation.login}</a>
+      <a href={common.navigation.appUrl} class="btn btn-primary w-full text-center mt-4">{common.navigation.tryFree}</a>
     </div>
   </nav>
 </header>
