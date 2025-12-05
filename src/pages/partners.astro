@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import CTASection from '../components/CTASection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { name: "Hem", url: "https://taxiadministration.se/" },
+  { name: "Partners", url: "https://taxiadministration.se/partners/" }
+];
+
+// Service schema for SEO
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "taxiadministration.se Partnerlösning",
+  "description": "Partnerlösning för revisorer och bokföringsbyråer som arbetar med taxiföretag. Automatiserad lönehantering och rapportering.",
+  "provider": {
+    "@type": "Organization",
+    "name": "taxiadministration.se",
+    "url": "https://taxiadministration.se"
+  },
+  "serviceType": "Lönehantering och redovisning för taxiföretag",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Sverige"
+  }
+};
+
+const benefits = [
+  {
+    title: "Spara tid",
+    description: "Smidig import av kördata från alla plattformar. Färdiga rapporter och löneunderlag med minimalt manuellt arbete.",
+    icon: "ph:clock-duotone",
+    features: [
+      "Enkel dataimport",
+      "Färdiga lönespecifikationer",
+      "Export till Excel och PDF"
+    ]
+  },
+  {
+    title: "Ny intäktskälla",
+    description: "Erbjud lönehantering som tilläggstjänst till dina taxikunder. Merförsäljning på befintliga kundrelationer.",
+    icon: "ph:currency-dollar-duotone",
+    features: [
+      "Lönehantering som tjänst",
+      "Merförsäljning till befintliga kunder",
+      "Skalbar affärsmodell"
+    ]
+  },
+  {
+    title: "Stärk kundrelationer",
+    description: "Bli en komplett partner för dina taxikunder. Erbjud mer värde och öka kundlojaliteten.",
+    icon: "ph:buildings-duotone",
+    features: [
+      "Komplett tjänsteutbud",
+      "Ökad kundnöjdhet",
+      "Starkare kundrelationer"
+    ]
+  }
+];
+
+const steps = [
+  {
+    number: "1",
+    title: "Registrera dina kunders åkerier",
+    description: "Enkel setup för varje taxikund. Vi hjälper dig komma igång med Bolt, Uber, SumUp och andra plattformar."
+  },
+  {
+    number: "2",
+    title: "Importera kördata smidigt",
+    description: "Importera kördata enkelt från alla plattformar. Systemet hanterar olika format och sammanställer allt på ett ställe."
+  },
+  {
+    number: "3",
+    title: "Färdiga löneunderlag",
+    description: "Exportera färdiga löneunderlag till Excel eller PDF. Beräkningar enligt svenska skatteregler med arbetsgivaravgifter och semesterersättning."
+  }
+];
+---
+
+<Layout
+  title="Partnerlösning för revisorer och bokföringsbyråer | Taxi Administration"
+  description="Effektivisera lönehanteringen för dina taxikunder. Smidig dataimport, färdiga löneunderlag och ny intäktskälla för din byrå."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <!-- Hero Section -->
+  <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <div class="container-custom">
+      <Breadcrumb items={breadcrumbItems} />
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
+          Partnerlösning för <span class="gradient-text">revisorer och bokföringsbyråer</span>
+        </h1>
+        <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
+          Effektivisera lönehanteringen för dina taxikunder. Smidig dataimport från Bolt, Uber, SumUp och fler med färdiga löneunderlag.
+        </p>
+        <div class="animate-on-scroll delay-2 mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/kontakt" class="btn btn-primary">
+            Kontakta oss
+            <Icon name="ph:arrow-right" class="ml-2 h-5 w-5" />
+          </a>
+          <a href="/losningar" class="btn btn-secondary">
+            Se alla funktioner
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center animate-on-scroll">
+        <h2 class="text-3xl font-bold">Utmaningen med taxi bokföring</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Taxibranschen har unika krav och utmaningar som kräver specialiserad kunskap.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-on-scroll delay-1">
+          <div class="h-12 w-12 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mb-4">
+            <Icon name="ph:clock-duotone" class="h-6 w-6" />
+          </div>
+          <h3 class="font-semibold text-lg">Tidskrävande datainsamling</h3>
+          <p class="mt-2 text-gray-600">Manuell insamling av kördata från förare och flera olika plattformar tar ovärderlig tid.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-on-scroll delay-2">
+          <div class="h-12 w-12 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mb-4">
+            <Icon name="ph:globe-duotone" class="h-6 w-6" />
+          </div>
+          <h3 class="font-semibold text-lg">Komplexa plattformar</h3>
+          <p class="mt-2 text-gray-600">Bolt, Uber, SumUp och fler - varje plattform har olika format och rapporter som måste konsolideras.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-on-scroll delay-3">
+          <div class="h-12 w-12 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mb-4">
+            <Icon name="ph:file-search" class="h-6 w-6" />
+          </div>
+          <h3 class="font-semibold text-lg">Risk för fel</h3>
+          <p class="mt-2 text-gray-600">Manuella beräkningar av provision, moms och arbetsgivaravgifter ökar risken för kostsamma misstag.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl font-bold">Fördelar för din byrå</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          taxiadministration.se ger dig verktygen för att effektivisera arbetet och utöka ditt tjänsteutbud.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {benefits.map((benefit, index) => (
+          <div class={`bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-on-scroll delay-${index + 1}`}>
+            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white mb-6">
+              <Icon name={benefit.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="text-xl font-bold">{benefit.title}</h3>
+            <p class="mt-3 text-gray-600">{benefit.description}</p>
+            <ul class="mt-4 space-y-2">
+              {benefit.features.map(feature => (
+                <li class="flex items-center text-sm text-gray-700">
+                  <Icon name="ph:check-circle-duotone" class="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl font-bold">Så fungerar det</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Kom igång på några enkla steg och börja effektivisera lönehanteringen för dina taxikunder.
+        </p>
+      </div>
+      <div class="mt-12 max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div class={`flex gap-6 mb-8 last:mb-0 animate-on-scroll delay-${index + 1}`}>
+            <div class="flex-shrink-0">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                {step.number}
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex-1">
+              <h3 class="text-xl font-bold">{step.title}</h3>
+              <p class="mt-2 text-gray-600">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features/USP Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="animate-on-scroll">
+          <h2 class="text-3xl font-bold">Byggt för svenska taxiföretag</h2>
+          <p class="mt-4 text-lg text-gray-600">
+            taxiadministration.se är utvecklat specifikt för svenska förhållanden med alla regler och beräkningar inbyggda.
+          </p>
+          <ul class="mt-8 space-y-4">
+            <li class="flex items-start">
+              <Icon name="ph:check-circle-duotone" class="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-0.5" />
+              <div>
+                <span class="font-semibold">Stöd för alla plattformar</span>
+                <p class="text-gray-600">Bolt, Uber, SumUp och fler plattformar.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <Icon name="ph:check-circle-duotone" class="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-0.5" />
+              <div>
+                <span class="font-semibold">Svenska skatteregler</span>
+                <p class="text-gray-600">Automatisk beräkning av moms, arbetsgivaravgifter och semesterersättning.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <Icon name="ph:check-circle-duotone" class="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-0.5" />
+              <div>
+                <span class="font-semibold">Flexibla lönemodeller</span>
+                <p class="text-gray-600">Stöd för olika provisionsstrukturer och delningsmodeller.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <Icon name="ph:check-circle-duotone" class="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-0.5" />
+              <div>
+                <span class="font-semibold">Export och rapporter</span>
+                <p class="text-gray-600">Exportera till Excel och PDF för vidare hantering i ditt befintliga system.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="animate-on-scroll delay-1">
+          <div class="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-8 text-white">
+            <h3 class="text-2xl font-bold">Bli partner idag</h3>
+            <p class="mt-4 text-blue-100">
+              Kontakta oss för att diskutera hur vi kan hjälpa dig effektivisera lönehanteringen för dina taxikunder och skapa nya affärsmöjligheter.
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-center">
+                <Icon name="ph:check-circle-duotone" class="h-5 w-5 mr-3" />
+                Personlig onboarding
+              </li>
+              <li class="flex items-center">
+                <Icon name="ph:check-circle-duotone" class="h-5 w-5 mr-3" />
+                Dedikerad support
+              </li>
+              <li class="flex items-center">
+                <Icon name="ph:check-circle-duotone" class="h-5 w-5 mr-3" />
+                Specialpriser för partners
+              </li>
+            </ul>
+            <a href="/kontakt" class="mt-8 inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              Kontakta oss
+              <Icon name="ph:arrow-right" class="ml-2 h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supported Platforms -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl font-bold">Stöd för alla stora plattformar</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Importera enkelt data från de plattformar dina kunder använder.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-1">
+          <span class="text-xl font-semibold text-gray-800">Bolt</span>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-2">
+          <span class="text-xl font-semibold text-gray-800">Uber</span>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-3">
+          <span class="text-xl font-semibold text-gray-800">SumUp</span>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-4">
+          <span class="text-xl font-semibold text-gray-800">Fler snart</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
