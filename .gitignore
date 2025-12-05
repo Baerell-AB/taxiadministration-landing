@@ -4,3 +4,7 @@ node_modules/
 
 # Firebase
 .firebase/
+
+# Playwright
+playwright-report/
+test-results/
