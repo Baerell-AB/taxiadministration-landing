@@ -28,6 +28,7 @@ const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
     <link rel="icon" type="image/png" href={faviconImg.src} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="canonical" href={Astro.url.href} />
     <ViewTransitions />
 
     <!-- Preload critical resources -->
@@ -38,18 +39,58 @@ const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Taxi Administration",
-        "url": "https://taxiadministration.se",
-        "logo": "https://taxiadministration.se/logo.png",
-        "description": "Lönehantering och bokföring för taxiåkerier i Sverige",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Stockholm",
-          "addressCountry": "SE"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/company/baerell/"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://taxiadministration.se/#organization",
+            "name": "Baerell AB",
+            "url": "https://taxiadministration.se",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://taxiadministration.se/logo.png",
+              "width": 200,
+              "height": 60
+            },
+            "description": "Utvecklar digitala lösningar för svensk taxi- och transportbransch",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Stockholm",
+              "addressCountry": "SE"
+            },
+            "sameAs": [
+              "https://www.linkedin.com/company/baerell/"
+            ]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://taxiadministration.se/#software",
+            "name": "Taxi Administration",
+            "description": "Automatiserad lönehantering och bokföring för taxiåkerier i Sverige",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "offers": {
+              "@type": "AggregateOffer",
+              "lowPrice": "0",
+              "highPrice": "499",
+              "priceCurrency": "SEK",
+              "offerCount": "3"
+            },
+            "featureList": "Automatiska löneberäkningar, Stöd för Uber/Bolt/Taxi Stockholm, PDF-rapporter, Excel-export",
+            "creator": {
+              "@id": "https://taxiadministration.se/#organization"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://taxiadministration.se/#website",
+            "url": "https://taxiadministration.se",
+            "name": "Taxi Administration",
+            "publisher": {
+              "@id": "https://taxiadministration.se/#organization"
+            },
+            "inLanguage": "sv-SE"
+          }
         ]
       }
     </script>

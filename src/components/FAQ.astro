@@ -21,7 +21,23 @@ const faqs = [
     answer: "Du kan börja helt gratis med 1 förare. Uppgradera till Standard för 499 kr/mån för upp till 10 förare. Större åkerier får skräddarsydd offert. Ingen bindningstid och inga dolda avgifter."
   }
 ];
+
+// Generate FAQPage schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section id="faq" class="py-20 bg-gray-50 relative overflow-hidden">
   <!-- Subtle background pattern -->
