@@ -3,9 +3,36 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import CTASection from '../components/CTASection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import salaryReport from '../assets/salaryReport.png';
 import driverReport from '../assets/driverReport.png';
 import configuration from '../assets/configuration.png';
+
+const breadcrumbItems = [
+  { name: "Hem", url: "https://taxiadministration.se/" },
+  { name: "Lösningar", url: "https://taxiadministration.se/losningar/" }
+];
+
+// VideoObject schema for SEO
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Taxi Administration Demo - Lönehantering för taxiåkerier",
+  "description": "Se hur Taxi Administration automatiserar löneberäkningar för taxiåkerier. Stöd för Uber, Bolt och Taxi Stockholm.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Iu3Cqa4QBL8/maxresdefault.jpg",
+  "uploadDate": "2024-01-01",
+  "contentUrl": "https://www.youtube.com/watch?v=Iu3Cqa4QBL8",
+  "embedUrl": "https://www.youtube.com/embed/Iu3Cqa4QBL8",
+  "duration": "PT3M",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Taxi Administration",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://taxiadministration.se/favicon.png"
+    }
+  }
+};
 
 const solutions = [
   {
@@ -51,8 +78,11 @@ const solutions = [
   title="Smarta lösningar för taxi revision och administration | Taxi Administration"
   description="Komplett lönehantering, förarrapporter och revisionsunderlag för taxiåkerier. Se demo och kom igång gratis."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
+      <Breadcrumb items={breadcrumbItems} />
       <div class="text-center max-w-4xl mx-auto">
         <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
           Smarta lösningar för <span class="gradient-text">taxi revision</span> och administration

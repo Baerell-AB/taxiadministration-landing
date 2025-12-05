@@ -2,6 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import CTASection from '../components/CTASection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { name: "Hem", url: "https://taxiadministration.se/" },
+  { name: "Om oss", url: "https://taxiadministration.se/om-oss/" }
+];
 
 const values = [
   {
@@ -28,11 +34,12 @@ const values = [
 ---
 
 <Layout
-  title="Om oss | Taxi Administration"
+  title="Om Baerell AB - Lönehantering för taxiåkerier i Stockholm | Taxi Administration"
   description="Lär känna Taxi Administration och Baerell AB. Vi utvecklar moderna lösningar för svenska taxiåkerier."
 >
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
+      <Breadcrumb items={breadcrumbItems} />
       <div class="text-center max-w-3xl mx-auto animate-on-scroll">
         <h1 class="text-4xl md:text-5xl font-bold leading-tight">
           Om <span class="gradient-text">Taxi Administration</span>

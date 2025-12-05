@@ -2,6 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import CTASection from '../components/CTASection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbItems = [
+  { name: "Hem", url: "https://taxiadministration.se/" },
+  { name: "Priser", url: "https://taxiadministration.se/priser/" }
+];
 
 const tiers = [
   {
@@ -78,6 +84,7 @@ const faqs = [
 >
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
+      <Breadcrumb items={breadcrumbItems} />
       <div class="text-center max-w-3xl mx-auto">
         <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
           Prisvärd <span class="gradient-text">taxi bokföring</span> - börja gratis

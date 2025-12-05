@@ -1,6 +1,5 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -8,15 +7,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  preloadImage?: string;
 }
 
 const {
   title,
-  description = "Automatisera löneberäkningar för ditt taxiåkeri. Stöd för Uber, Bolt, Taxi Stockholm. Börja gratis."
+  description = "Automatisera löneberäkningar för ditt taxiåkeri. Stöd för Uber, Bolt, Taxi Stockholm. Börja gratis.",
+  preloadImage
 } = Astro.props;
-
-// Preload critical assets
-const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
 ---
 
 <!doctype html>
@@ -25,7 +23,7 @@ const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href={faviconImg.src} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="canonical" href={Astro.url.href} />
@@ -34,6 +32,7 @@ const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -101,7 +100,16 @@ const faviconImg = await getImage({src: '/favicon.png', width: 32, height: 32});
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:locale" content="sv_SE" />
-    <meta property="og:image" content="https://taxiadministration.se/og-image.jpg" />
+    <meta property="og:image" content="https://taxiadministration.se/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Taxi Administration" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://taxiadministration.se/og-image.png" />
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="skip-link">Hoppa till innehåll</a>
