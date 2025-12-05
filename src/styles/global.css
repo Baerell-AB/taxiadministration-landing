@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --gradient-purple-blue: linear-gradient(135deg, #7928CA 0%, #0070F3 100%);
+  --gradient-purple-blue: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
 }
 
 html {
@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  @apply font-sans text-payflo-dark;
+  @apply font-sans text-gray-900;
   position: relative; /* For scroll progress bar */
 }
 
@@ -102,7 +102,7 @@ body {
 }
 
 .btn:focus {
-  outline: 2px solid theme('colors.payflo-purple');
+  outline: 2px solid theme('colors.blue.600');
   outline-offset: 2px;
 }
 
@@ -119,11 +119,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-payflo-purple text-white hover:bg-opacity-90;
+  @apply bg-blue-600 text-white hover:bg-blue-700;
 }
 
 .btn-secondary {
-  @apply bg-white text-payflo-dark border border-gray-200 hover:bg-gray-50;
+  @apply bg-white text-gray-900 border border-gray-200 hover:bg-gray-50;
 }
 
 .container-custom {
@@ -168,7 +168,7 @@ nav a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: theme('colors.payflo-purple');
+  background-color: theme('colors.blue.600');
   transition: width 0.3s ease;
 }
 
@@ -178,7 +178,7 @@ nav a:focus::after {
 }
 
 .active-nav-link {
-  @apply text-payflo-purple;
+  @apply text-blue-600;
 }
 
 .active-nav-link::after {
@@ -191,7 +191,7 @@ nav a:focus::after {
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(to right, theme('colors.payflo-purple'), theme('colors.payflo-blue'));
+  background: linear-gradient(to right, theme('colors.blue.600'), theme('colors.blue.400'));
   z-index: 100;
   width: 0%;
   transition: width 0.1s ease;
@@ -223,7 +223,7 @@ nav a:focus::after {
 }
 
 .faq-summary-open {
-  @apply text-payflo-purple;
+  @apply text-blue-600;
 }
 
 /* ===== Mobile Menu Animations ===== */
@@ -274,7 +274,7 @@ nav a:focus::after {
 
 /* ===== Testimonial Card Effects ===== */
 .testimonial-card {
-  @apply bg-payflo-gray rounded-xl p-8 transition-all duration-300;
+  @apply bg-gray-50 rounded-xl p-8 transition-all duration-300;
 }
 
 .testimonial-card:hover,
@@ -285,7 +285,7 @@ nav a:focus::after {
 
 /* ===== Focus Indicators ===== */
 *:focus {
-  outline: 2px solid theme('colors.payflo-purple');
+  outline: 2px solid theme('colors.blue.600');
   outline-offset: 2px;
 }
 
@@ -299,7 +299,7 @@ nav a:focus::after {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: theme('colors.payflo-purple');
+  background: theme('colors.blue.600');
   color: white;
   padding: 8px;
   border-radius: 4px;

@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import CTASection from '../components/CTASection.astro';
+
+const values = [
+  {
+    title: "Enkelhet",
+    description: "Vi tror på att göra det komplicerade enkelt. Vår lösning är byggd för att spara tid och minska administration, inte öka den.",
+    icon: "ph:puzzle-piece-duotone"
+  },
+  {
+    title: "Lokal expertis",
+    description: "Vi förstår svenska skatteregler, kollektivavtal och de unika utmaningarna för taxi- och transportbranschen.",
+    icon: "ph:globe-duotone"
+  },
+  {
+    title: "Pålitlighet",
+    description: "Ditt företag är beroende av korrekta beräkningar. Vi levererar precision och tillförlitlighet i varje rapport.",
+    icon: "ph:shield-check-duotone"
+  },
+  {
+    title: "Support",
+    description: "Vi finns här för dig. Svensk support som förstår dina utmaningar och kan hjälpa dig snabbt.",
+    icon: "ph:lifebuoy-duotone"
+  }
+];
+---
+
+<Layout
+  title="Om oss | Taxi Administration"
+  description="Lär känna Taxi Administration och Baerell AB. Vi utvecklar moderna lösningar för svenska taxiåkerier."
+>
+  <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+          Om <span class="gradient-text">Taxi Administration</span>
+        </h1>
+        <p class="mt-6 text-xl text-gray-600">
+          Vi hjälper svenska taxiåkerier att automatisera sin administration och spara värdefull tid.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-6">Vår historia</h2>
+        <div class="prose prose-lg text-gray-600">
+          <p>
+            Taxi Administration är utvecklat av Baerell AB, ett svenskt teknikföretag baserat i Stockholm.
+            Vi startade med en enkel insikt: taxiåkare och åkeriägare lägger alldeles för mycket tid på administration.
+          </p>
+          <p class="mt-4">
+            Med bakgrund inom både transportbranschen och mjukvaruutveckling har vi byggt ett system
+            som faktiskt förstår hur taxibranschen fungerar i Sverige. Vi vet hur viktigt det är med
+            korrekta beräkningar, snabb rapportering och enkel hantering av flera plattformar.
+          </p>
+          <p class="mt-4">
+            Vår vision är att ge varje taxiåkeri tillgång till professionella verktyg som tidigare
+            bara var tillgängliga för stora företag - utan den stora prislappen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">
+          Våra värderingar
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Det vi tror på och arbetar efter varje dag.
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {values.map((value, index) => (
+          <div
+            class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-on-scroll border border-gray-100"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white mb-6">
+              <Icon name={value.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="text-xl font-semibold">{value.title}</h3>
+            <p class="mt-3 text-gray-600">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Info -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center animate-on-scroll">
+        <h2 class="text-3xl font-bold mb-8">Kontaktuppgifter</h2>
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <p class="text-lg font-semibold text-gray-900">Baerell AB</p>
+          <p class="mt-2 text-gray-600">Stockholm, Sverige</p>
+          <div class="mt-6">
+            <a
+              href="https://www.linkedin.com/company/baerell/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-blue-600 hover:underline"
+            >
+              <Icon name="ph:linkedin-logo-duotone" class="h-5 w-5 mr-2" />
+              Följ oss på LinkedIn
+            </a>
+          </div>
+          <div class="mt-4">
+            <a href="/kontakt" class="btn btn-primary">
+              Kontakta oss
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

@@ -3,44 +3,42 @@ import { Image } from 'astro:assets';
 import logoSrc from '../assets/tk-logga.png';
 
 const navItems = [
-  { name: 'Product', href: '/product' },
-  { name: 'Solutions', href: '/solutions' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'About Us', href: '/about-us' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Funktioner', href: '/#funktioner' },
+  { name: 'Lösningar', href: '/losningar' },
+  { name: 'Priser', href: '/priser' },
+  { name: 'Om oss', href: '/om-oss' },
 ];
 ---
 
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100" role="banner">
   <div class="container-custom flex items-center justify-between h-20">
-    <a href="/" class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded" aria-label="Payflo home">
-      <Image src={logoSrc} alt="Payflo Logo" width={120} height={40} class="transition-all duration-300 hover:brightness-110 focus:brightness-110" />
+    <a href="/" class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded" aria-label="Taxi Administration hem">
+      <Image src={logoSrc} alt="Taxi Administration logotyp" width={120} height={40} class="transition-all duration-300 hover:brightness-110 focus:brightness-110" />
     </a>
-    
+
     <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+    <nav class="hidden md:flex items-center space-x-8" role="navigation" aria-label="Huvudnavigation">
       {navItems.map(item => (
-        <a 
-          href={item.href} 
-          class="text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1"
+        <a
+          href={item.href}
+          class="text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1"
         >
           {item.name}
         </a>
       ))}
     </nav>
-    
+
     <div class="flex items-center space-x-4">
-      <a href="/login" class="hidden md:inline-block text-payflo-dark hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1">
-        Log In
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-payflo-purple transition-all duration-300 group-hover:w-full"></span>
+      <a href="https://app.taxiadministration.se" class="hidden md:inline-block text-gray-900 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1">
+        Logga in
       </a>
-      <a href="/book-demo" class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2">Book a Demo</a>
-      
+      <a href="https://app.taxiadministration.se" class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Testa gratis</a>
+
       <!-- Mobile Menu Button -->
-      <button 
-        id="menu-toggle" 
-        class="md:hidden flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded p-1" 
-        aria-label="Toggle navigation menu"
+      <button
+        id="menu-toggle"
+        class="md:hidden flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded p-1"
+        aria-label="Öppna meny"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -50,20 +48,34 @@ const navItems = [
       </button>
     </div>
   </div>
-  
+
   <!-- Mobile Menu -->
-  <nav id="mobile-menu" class="hidden md:hidden bg-white w-full border-t border-gray-100" role="navigation" aria-label="Mobile navigation">
+  <nav id="mobile-menu" class="hidden md:hidden bg-white w-full border-t border-gray-100" role="navigation" aria-label="Mobilnavigation">
     <div class="container-custom py-4 space-y-4">
       {navItems.map((item, index) => (
-        <a 
-          href={item.href} 
-          class="block py-2 px-2 text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
+        <a
+          href={item.href}
+          class="block py-2 px-2 text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
           style={`transition-delay: ${index * 50}ms;`}
         >
           {item.name}
         </a>
       ))}
-      <a href="/login" class="block py-2 px-2 text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded">Log In</a>
+      <a href="https://app.taxiadministration.se" class="block py-2 px-2 text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded">Logga in</a>
+      <a href="https://app.taxiadministration.se" class="btn btn-primary w-full text-center mt-4">Testa gratis</a>
     </div>
   </nav>
 </header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle?.addEventListener('click', () => {
+      const isOpen = mobileMenu?.classList.toggle('hidden') === false;
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
+    });
+  });
+</script>
