@@ -226,31 +226,29 @@ nav a:focus::after {
   @apply text-blue-600;
 }
 
-/* ===== Mobile Menu Animations ===== */
+/* ===== Mobile Menu - CSS :has() approach ===== */
 #mobile-menu {
-  max-height: 0;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
+  display: none;
 }
 
-#mobile-menu.mobile-menu-open {
-  max-height: 500px;
-  opacity: 1;
+header:has(#menu-toggle[aria-expanded="true"]) #mobile-menu {
+  display: block;
 }
 
-#mobile-menu.mobile-menu-closing {
-  max-height: 0;
-  opacity: 0;
-}
-
-/* Hamburger to X animation */
+/* Hamburger icon rotation */
 #menu-toggle svg {
   transition: transform 0.3s ease;
 }
 
-#menu-toggle.menu-open svg {
+#menu-toggle[aria-expanded="true"] svg {
   transform: rotate(90deg);
+}
+
+/* Hide menu button on desktop */
+@media (min-width: 768px) {
+  #mobile-menu {
+    display: none !important;
+  }
 }
 
 /* ===== Parallax Effect ===== */

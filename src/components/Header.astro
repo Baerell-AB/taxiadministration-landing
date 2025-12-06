@@ -46,7 +46,7 @@ const navItems = common.navigation.items;
   </div>
 
   <!-- Mobile Menu -->
-  <nav id="mobile-menu" class="hidden md:hidden bg-white w-full border-t border-gray-100" role="navigation" aria-label="Mobilnavigation">
+  <nav id="mobile-menu" class="bg-white w-full border-t border-gray-100" role="navigation" aria-label="Mobilnavigation">
     <div class="container-custom py-4 space-y-4">
       {navItems.map((item, index) => (
         <a
@@ -66,12 +66,10 @@ const navItems = common.navigation.items;
 <script>
   document.addEventListener('astro:page-load', () => {
     const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
     menuToggle?.addEventListener('click', () => {
-      const isOpen = mobileMenu?.classList.toggle('hidden') === false;
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-      menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      menuToggle.setAttribute('aria-label', !isExpanded ? 'Stäng meny' : 'Öppna meny');
     });
   });
 </script>
