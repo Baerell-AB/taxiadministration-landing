@@ -119,6 +119,9 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://taxiadministration.se/og-image.png" />
+
+    <!-- Additional head content (for structured data etc) -->
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="skip-link">Hoppa till innehåll</a>

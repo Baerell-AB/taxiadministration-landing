@@ -4,6 +4,7 @@ export const navigation = {
     { name: 'Funktioner', href: '/#funktioner' },
     { name: 'Lösningar', href: '/losningar' },
     { name: 'Priser', href: '/priser' },
+    { name: 'Blogg', href: '/blog' },
     { name: 'Om oss', href: '/om-oss' },
   ],
   login: 'Logga in',
@@ -22,6 +23,7 @@ export const footer = {
     links: [
       { name: 'Funktioner', href: '/#funktioner' },
       { name: 'Priser', href: '/priser' },
+      { name: 'Blogg', href: '/blog' },
       { name: 'Partners', href: '/partners' },
     ],
   },
