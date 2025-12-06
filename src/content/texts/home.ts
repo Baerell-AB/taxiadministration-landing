@@ -5,7 +5,11 @@ export const seo = {
 };
 
 export const hero = {
-  title: 'Automatisera dina löneberäkningar med precision',
+  title: {
+    start: 'Automatisera dina',
+    highlight: 'löneberäkningar',
+    end: 'med precision',
+  },
   subtitle: 'Se dina samlade intäkter och beräkna löner från alla olika plattformar. Bolt, Uber, SumUp och många fler snart.',
   buttons: {
     primary: {
