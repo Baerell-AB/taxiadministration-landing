@@ -39,8 +39,8 @@ export const footer = {
   legal: {
     title: 'Juridiskt',
     links: [
-      { name: 'Integritetspolicy', href: '/integritetspolicy' },
-      { name: 'Användarvillkor', href: '/anvandarvillkor' },
+      { name: 'Integritetspolicy', href: 'https://app.taxiadministration.se/privacy' },
+      { name: 'Användarvillkor', href: 'https://app.taxiadministration.se/terms' },
     ],
   },
 };
