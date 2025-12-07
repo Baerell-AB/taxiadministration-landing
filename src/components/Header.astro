@@ -1,9 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import logoSrc from '../assets/tk-logga.png';
-import { common } from '../content/texts';
+import { getLangFromUrl } from '../i18n/utils';
+import * as svTranslations from '../i18n/translations/sv';
+import * as enTranslations from '../i18n/translations/en';
 
+const lang = getLangFromUrl(Astro.url);
+const translations = lang === 'sv' ? svTranslations : enTranslations;
+const common = translations.common;
 const navItems = common.navigation.items;
+
+// Generate alternate language URL
+const currentPath = Astro.url.pathname;
+const alternatePath = lang === 'sv'
+  ? currentPath === '/' ? '/en' : `/en${currentPath}`
+  : currentPath.replace(/^\/en/, '') || '/';
+const alternateLabel = lang === 'sv' ? 'EN' : 'SV';
 ---
 
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100" role="banner">
@@ -25,6 +37,15 @@ const navItems = common.navigation.items;
     </nav>
 
     <div class="flex items-center space-x-4">
+      <!-- Language Switcher -->
+      <a
+        href={alternatePath}
+        class="hidden md:inline-block px-3 py-1 text-sm font-medium text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded border border-gray-300 hover:border-blue-600"
+        aria-label={lang === 'sv' ? 'Switch to English' : 'Byt till Svenska'}
+      >
+        {alternateLabel}
+      </a>
+
       <a href={common.navigation.appUrl} class="hidden md:inline-block text-gray-900 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1">
         {common.navigation.login}
       </a>

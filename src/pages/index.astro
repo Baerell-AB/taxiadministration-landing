@@ -6,7 +6,7 @@ import CTASection from '../components/CTASection.astro';
 import FAQ from '../components/FAQ.astro';
 import { getImage } from 'astro:assets';
 import heroImage from '../assets/salaryReport.png';
-import { home } from '../content/texts';
+import { home } from '../i18n/translations/sv';
 
 // Get optimized hero image for preloading
 const optimizedHero = await getImage({ src: heroImage, width: 700 });

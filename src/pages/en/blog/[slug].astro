@@ -1,0 +1,183 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CTASection from '../../../components/CTASection.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('blog');
+  return allBlogPosts.map((post) => ({
+    params: { slug: post.id },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry('blog', slug);
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { data } = post;
+const canonicalUrl = `https://taxiadministration.se/en/blog/${slug}`;
+
+// Create Article structured data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": data.title,
+  "description": data.excerpt,
+  "datePublished": data.date,
+  "dateModified": data.date,
+  "author": {
+    "@type": "Organization",
+    "name": "Taxiadministration",
+    "url": "https://taxiadministration.se"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Taxiadministration",
+    "url": "https://taxiadministration.se",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://taxiadministration.se/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "keywords": data.tags ? data.tags.join(", ") : "",
+  "inLanguage": "en-US"
+};
+
+// BreadcrumbList for SEO
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://taxiadministration.se/en"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://taxiadministration.se/en/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": data.title,
+      "item": canonicalUrl
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${data.title} - Taxiadministration Blogg`}
+  description={data.excerpt}
+>
+  <!-- Article Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+  <article>
+    <!-- Hero Section with Image -->
+    <section class="pt-20 pb-8 md:pt-28 md:pb-12">
+      <div class="container-custom">
+        <Breadcrumb items={[
+          { label: 'Home', href: '/en' },
+          { label: 'Blog', href: '/en/blog' },
+          { label: data.title, href: `/en/blog/${slug}` }
+        ]} />
+
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-8 animate-on-scroll">
+            <!-- Tags -->
+            {data.tags && data.tags.length > 0 && (
+              <div class="flex items-center justify-center gap-2 mb-4">
+                {data.tags.map((tag) => (
+                  <span class="text-xs px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-medium">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+              {data.title}
+            </h1>
+
+            <!-- Date -->
+            <p class="text-gray-500 text-sm mb-6">
+              Publicerad {data.date}
+            </p>
+
+            <!-- Excerpt -->
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              {data.excerpt}
+            </p>
+          </div>
+
+          <!-- Featured Image -->
+          {data.image && (
+            <div class="aspect-video rounded-xl overflow-hidden shadow-lg mb-12 animate-on-scroll">
+              <img
+                src={data.image}
+                alt={data.title}
+                class="w-full h-full object-cover"
+                loading="eager"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="py-8 pb-20">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="prose prose-lg max-w-none animate-on-scroll
+                   prose-headings:font-bold prose-headings:text-gray-900
+                   prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+                   prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+                   prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
+                   prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                   prose-strong:text-gray-900 prose-strong:font-semibold
+                   prose-blockquote:border-l-4 prose-blockquote:border-blue-600
+                   prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700
+                   prose-img:rounded-xl prose-img:shadow-md"
+            set:html={data.content}
+          />
+
+          <!-- Back to Blog -->
+          <div class="mt-12 text-center animate-on-scroll">
+            <a
+              href="/en/blog"
+              class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+            >
+              <svg
+                class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Tillbaka till bloggen
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTASection />
+  </article>
+</Layout>

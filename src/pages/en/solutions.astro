@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import CTASection from '../components/CTASection.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
-import salaryReport from '../assets/salaryReport.png';
-import driverReport from '../assets/driverReport.png';
-import configuration from '../assets/configuration.png';
-import { solutions } from '../i18n/translations/sv';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import salaryReport from '../../assets/salaryReport.png';
+import driverReport from '../../assets/driverReport.png';
+import configuration from '../../assets/configuration.png';
+import { solutions } from '../../i18n/translations/en';
 
 const imageMap = { salaryReport, driverReport, configuration };
 const solutionsList = solutions.solutions.map(s => ({ ...s, image: imageMap[s.image as keyof typeof imageMap] }));

@@ -8,9 +8,24 @@ export default defineConfig({
   site: 'https://taxiadministration.se',
   output: 'static',
   prefetch: true,
+  i18n: {
+    defaultLocale: 'sv',
+    locales: ['sv', 'en'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   integrations: [
     tailwind(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'sv',
+        locales: {
+          sv: 'sv-SE',
+          en: 'en-US'
+        }
+      }
+    }),
     icon({
       include: {
         ph: [
