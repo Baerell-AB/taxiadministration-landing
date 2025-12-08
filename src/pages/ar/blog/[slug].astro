@@ -6,7 +6,7 @@ import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const allBlogPosts = await getCollection('blog', ({ data }) => {
-    return data.locale === 'en';
+    return data.locale === 'ar';
   });
   return allBlogPosts.map((post) => ({
     params: { slug: post.id },
@@ -21,7 +21,7 @@ if (!post) {
 }
 
 const { data } = post;
-const canonicalUrl = `https://taxiadministration.se/en/blog/${slug}`;
+const canonicalUrl = `https://taxiadministration.se/ar/blog/${slug}`;
 
 // Create Article structured data
 const articleSchema = {
@@ -50,7 +50,7 @@ const articleSchema = {
     "@id": canonicalUrl
   },
   "keywords": data.tags ? data.tags.join(", ") : "",
-  "inLanguage": "en-US"
+  "inLanguage": "ar-SA"
 };
 
 // BreadcrumbList for SEO
@@ -61,14 +61,14 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Home",
-      "item": "https://taxiadministration.se/en"
+      "name": "الرئيسية",
+      "item": "https://taxiadministration.se/ar"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Blog",
-      "item": "https://taxiadministration.se/en/blog"
+      "name": "المدونة",
+      "item": "https://taxiadministration.se/ar/blog"
     },
     {
       "@type": "ListItem",
@@ -92,9 +92,9 @@ const breadcrumbSchema = {
     <section class="pt-20 pb-8 md:pt-28 md:pb-12">
       <div class="container-custom">
         <Breadcrumb items={[
-          { label: 'Home', href: '/en' },
-          { label: 'Blog', href: '/en/blog' },
-          { label: data.title, href: `/en/blog/${slug}` }
+          { label: 'الرئيسية', href: '/ar' },
+          { label: 'المدونة', href: '/ar/blog' },
+          { label: data.title, href: `/ar/blog/${slug}` }
         ]} />
 
         <div class="max-w-4xl mx-auto">
@@ -117,7 +117,7 @@ const breadcrumbSchema = {
 
             <!-- Date -->
             <p class="text-gray-500 text-sm mb-6">
-              Publicerad {data.date}
+              نُشر في {data.date}
             </p>
 
             <!-- Excerpt -->
@@ -162,7 +162,7 @@ const breadcrumbSchema = {
           <!-- Back to Blog -->
           <div class="mt-12 text-center animate-on-scroll">
             <a
-              href="/en/blog"
+              href="/ar/blog"
               class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
             >
               <svg
@@ -173,7 +173,7 @@ const breadcrumbSchema = {
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
-              Tillbaka till bloggen
+              العودة إلى المدونة
             </a>
           </div>
         </div>

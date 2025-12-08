@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import salaryReport from '../../assets/salaryReport.png';
+import driverReport from '../../assets/driverReport.png';
+import configuration from '../../assets/configuration.png';
+import { solutions } from '../../i18n/translations/ar';
+
+const imageMap = { salaryReport, driverReport, configuration };
+const solutionsList = solutions.solutions.map(s => ({ ...s, image: imageMap[s.image as keyof typeof imageMap] }));
+---
+
+<Layout
+  title={solutions.seo.title}
+  description={solutions.seo.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(solutions.video.videoSchema)} />
+
+  <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <div class="container-custom">
+      <Breadcrumb items={solutions.header.breadcrumbs} />
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
+          {solutions.header.title}
+        </h1>
+        <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
+          {solutions.header.subtitle}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Demo Section -->
+  <section id="demo" class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 animate-on-scroll">
+          {solutions.demo.title}
+        </h2>
+        <div class="animate-on-scroll delay-1 aspect-video rounded-xl overflow-hidden shadow-xl">
+          <iframe
+            class="w-full h-full"
+            src={`https://www.youtube.com/embed/${solutions.demo.videoId}`}
+            title={solutions.demo.description}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Grid -->
+  <section class="py-20">
+    <div class="container-custom">
+      {solutionsList.map((solution, index) => (
+        <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 last:mb-0 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          <div class={`animate-on-scroll delay-${index}`}>
+            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white mb-6">
+              <Icon name={solution.icon} class="h-6 w-6" />
+            </div>
+            <h2 class="text-3xl font-bold">{solution.title}</h2>
+            <p class="mt-4 text-lg text-gray-600">{solution.description}</p>
+            <ul class="mt-6 space-y-3">
+              {solution.features.map(feature => (
+                <li class="flex items-center text-gray-700">
+                  <Icon name="ph:check-circle-duotone" class="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class={`animate-on-scroll delay-${index + 1} ${index % 2 === 1 ? 'lg:order-first' : ''}`}>
+            <div class="relative hover-zoom">
+              <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl blur opacity-20"></div>
+              <div class="relative bg-white rounded-xl shadow-lg overflow-hidden">
+                <Image
+                  src={solution.image}
+                  alt={solution.title}
+                  class="w-full h-auto"
+                  width={600}
+                  height={400}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Supported Platforms -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+        <h2 class="text-3xl font-bold">{solutions.platforms.title}</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          {solutions.platforms.subtitle}
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+        {solutions.platforms.list.map((platform, index) => (
+          <div class={`bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-${index + 1}`}>
+            <span class="text-xl font-semibold text-gray-800">{platform}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

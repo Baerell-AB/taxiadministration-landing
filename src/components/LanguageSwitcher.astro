@@ -1,0 +1,106 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from '../i18n/config';
+
+// Get current path without language prefix
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(/^\/(en|ar)/, '') || '/';
+
+// Language configuration with flags
+const languageConfig = {
+  sv: {
+    name: 'Svenska',
+    flag: '🇸🇪',
+    code: 'sv'
+  },
+  en: {
+    name: 'English',
+    flag: '🇬🇧',
+    code: 'en'
+  },
+  ar: {
+    name: 'العربية',
+    flag: '🇸🇦',
+    code: 'ar'
+  }
+};
+
+const currentLocale = Astro.currentLocale || 'sv';
+---
+
+<!-- Desktop Language Switcher -->
+<div class="hidden md:block relative group">
+  <button
+    type="button"
+    class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded border border-gray-300 hover:border-blue-600"
+    aria-label="Välj språk"
+    aria-haspopup="true"
+  >
+    <span class="text-lg">{languageConfig[currentLocale].flag}</span>
+    <span>{languageConfig[currentLocale].code.toUpperCase()}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+    <div class="py-1">
+      {Object.entries(languageConfig).map(([locale, config]) => {
+        const url = getRelativeLocaleUrl(locale, pathWithoutLocale);
+        const isActive = currentLocale === locale;
+
+        return (
+          <a
+            href={url}
+            class={`flex items-center space-x-3 px-4 py-2 text-sm transition-colors duration-200 ${
+              isActive
+                ? 'bg-blue-50 text-blue-600 font-medium'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+            aria-current={isActive ? 'true' : undefined}
+          >
+            <span class="text-xl">{config.flag}</span>
+            <span>{config.name}</span>
+            {isActive && (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Language Switcher -->
+<div class="md:hidden">
+  <div class="py-2 border-t border-gray-100">
+    <p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Språk / Language</p>
+    {Object.entries(languageConfig).map(([locale, config]) => {
+      const url = getRelativeLocaleUrl(locale, pathWithoutLocale);
+      const isActive = currentLocale === locale;
+
+      return (
+        <a
+          href={url}
+          class={`flex items-center space-x-3 px-4 py-2 text-sm transition-colors duration-200 ${
+            isActive
+              ? 'bg-blue-50 text-blue-600 font-medium'
+              : 'text-gray-700 hover:bg-gray-50'
+          }`}
+          aria-current={isActive ? 'true' : undefined}
+        >
+          <span class="text-xl">{config.flag}</span>
+          <span>{config.name}</span>
+          {isActive && (
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </a>
+      );
+    })}
+  </div>
+</div>

@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import { getImage } from 'astro:assets';
+import heroImage from '../../assets/salaryReport.png';
+import { home } from '../../i18n/translations/ar';
+
+// Get optimized hero image for preloading
+const optimizedHero = await getImage({ src: heroImage, width: 700 });
+---
+
+<Layout
+  title={home.seo.title}
+  description={home.seo.description}
+  preloadImage={optimizedHero.src}
+>
+  <Hero />
+  <Features />
+  <FAQ />
+  <CTASection />
+</Layout>

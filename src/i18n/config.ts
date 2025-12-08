@@ -1,6 +1,7 @@
 export const languages = {
   sv: 'Svenska',
   en: 'English',
+  ar: 'العربية',
 };
 
 export const defaultLang = 'sv';
@@ -14,5 +15,8 @@ export const ui = {
   },
   en: {
     'nav.skipToContent': 'Skip to content',
+  },
+  ar: {
+    'nav.skipToContent': 'تخطى إلى المحتوى',
   },
 } as const;

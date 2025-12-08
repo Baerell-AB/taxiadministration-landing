@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CTASection from '../components/CTASection.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
-import { blog } from '../i18n/translations/sv';
+import { blog } from '../../i18n/translations/ar';
 
 const allBlogPosts = await getCollection('blog', ({ data }) => {
-  return data.locale === 'sv';
+  return data.locale === 'ar';
 });
 // Sort by date (newest first)
 const sortedPosts = allBlogPosts.sort((a, b) => {
@@ -41,7 +41,7 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
             class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden animate-on-scroll border border-gray-100 group"
             style={`animation-delay: ${index * 0.1}s`}
           >
-            <a href={`/blog/${post.id}`} class="block">
+            <a href={`/ar/blog/${post.id}`} class="block">
               {post.data.image && (
                 <div class="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 overflow-hidden">
                   <img

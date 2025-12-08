@@ -7,9 +7,10 @@ import featureImage3 from '../assets/salaryReport.png';
 import { getLangFromUrl } from '../i18n/utils';
 import * as svTranslations from '../i18n/translations/sv';
 import * as enTranslations from '../i18n/translations/en';
+import * as arTranslations from '../i18n/translations/ar';
 
 const lang = getLangFromUrl(Astro.url);
-const translations = lang === 'sv' ? svTranslations : enTranslations;
+const translations = lang === 'sv' ? svTranslations : lang === 'en' ? enTranslations : arTranslations;
 const home = translations.home;
 
 const imageMap = { salaryReport: featureImage3, driverReport: featureImage2, configuration: featureImage1 };
