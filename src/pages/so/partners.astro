@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { partners } from '../../i18n/translations/so';
+---
+
+<Layout
+  title={partners.seo.title}
+  description={partners.seo.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(partners.serviceSchema)} />
+
+  <!-- Hero Section -->
+  <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <div class="container-custom">
+      <Breadcrumb items={partners.breadcrumb} />
+      <div class="max-w-4xl mx-auto">
+        <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
+          {partners.hero.title.start} <span class="gradient-text">{partners.hero.title.highlight}</span>
+        </h1>
+        <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
+          {partners.hero.subtitle}
+        </p>
+        <div class="animate-on-scroll delay-2 mt-8 flex flex-col sm:flex-row gap-4">
+          <a href={partners.hero.buttons.primary.href} class="btn btn-primary">
+            {partners.hero.buttons.primary.text}
+          </a>
+          <a href={partners.hero.buttons.secondary.href} class="btn btn-secondary">
+            {partners.hero.buttons.secondary.text}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">{partners.problemSection.title}</h2>
+        <p class="mt-4 text-xl text-gray-600">{partners.problemSection.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {partners.problemSection.problems.map((problem, index) => (
+          <div class={`bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 animate-on-scroll delay-${index + 1}`}>
+            <div class="h-12 w-12 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mb-6">
+              <Icon name={problem.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="text-xl font-semibold mb-3">{problem.title}</h3>
+            <p class="text-gray-600">{problem.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">{partners.benefitsSection.title}</h2>
+        <p class="mt-4 text-xl text-gray-600">{partners.benefitsSection.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {partners.benefitsSection.benefits.map((benefit, index) => (
+          <div class={`bg-gradient-to-br from-blue-50 to-white rounded-xl p-8 border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 animate-on-scroll delay-${index + 1}`}>
+            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white mb-6">
+              <Icon name={benefit.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="text-xl font-semibold mb-3">{benefit.title}</h3>
+            <p class="text-gray-600 mb-4">{benefit.description}</p>
+            <ul class="space-y-2">
+              {benefit.features.map(feature => (
+                <li class="flex items-center text-gray-700">
+                  <Icon name="ph:check-circle-duotone" class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">{partners.howItWorks.title}</h2>
+        <p class="mt-4 text-xl text-gray-600">{partners.howItWorks.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {partners.howItWorks.steps.map((step, index) => (
+          <div class={`relative bg-white rounded-xl p-8 shadow-sm animate-on-scroll delay-${index + 1}`}>
+            <div class="absolute -top-4 left-8 h-12 w-12 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white text-xl font-bold">
+              {step.number}
+            </div>
+            <div class="mt-6">
+              <h3 class="text-xl font-semibold mb-3">{step.title}</h3>
+              <p class="text-gray-600">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">{partners.featuresSection.title}</h2>
+        <p class="mt-4 text-xl text-gray-600">{partners.featuresSection.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {partners.featuresSection.features.map((feature, index) => (
+          <div class={`bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 animate-on-scroll delay-${index % 4}`}>
+            <h3 class="font-semibold mb-2">{feature.title}</h3>
+            <p class="text-sm text-gray-600">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Platforms Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
+        <h2 class="text-3xl font-bold">{partners.platformsSection.title}</h2>
+        <p class="mt-4 text-lg text-gray-600">{partners.platformsSection.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+        {partners.platformsSection.platforms.map((platform, index) => (
+          <div class={`bg-white rounded-lg p-6 text-center shadow-sm animate-on-scroll delay-${index + 1}`}>
+            <span class="text-xl font-semibold text-gray-800">{platform}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner CTA Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-12 text-white animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{partners.partnerCta.title}</h2>
+        <p class="text-xl mb-8 text-white/90">{partners.partnerCta.description}</p>
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          {partners.partnerCta.features.map((feature) => (
+            <div class="flex items-center">
+              <Icon name="ph:check-circle-duotone" class="h-5 w-5 mr-2" />
+              <span>{feature}</span>
+            </div>
+          ))}
+        </div>
+        <a href={partners.partnerCta.button.href} class="btn bg-white text-blue-600 hover:bg-white/90">
+          {partners.partnerCta.button.text}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

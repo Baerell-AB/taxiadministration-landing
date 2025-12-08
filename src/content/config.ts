@@ -12,7 +12,7 @@ const blogCollection = defineCollection({
     content: z.string(),
     image: z.string(),
     tags: z.array(z.string()),
-    locale: z.enum(['sv', 'en', 'ar']),
+    locale: z.enum(['sv', 'en', 'ar', 'so', 'fa']),
   }),
 });
 

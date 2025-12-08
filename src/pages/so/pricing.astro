@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { pricing } from '../../i18n/translations/so';
+
+---
+
+<Layout
+  title={pricing.seo.title}
+  description={pricing.seo.description}
+>
+  <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <div class="container-custom">
+      <Breadcrumb items={pricing.header.breadcrumbs} />
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
+          {pricing.header.title}
+        </h1>
+        <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
+          {pricing.header.subtitle}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {pricing.tiers.map((tier, index) => (
+          <div class={`bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 relative animate-on-scroll delay-${index + 1} ${tier.highlighted ? 'ring-2 ring-blue-600' : ''}`}>
+            {tier.highlighted && (
+              <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                Ugu Caansan
+              </div>
+            )}
+            <h3 class="text-2xl font-semibold">{tier.name}</h3>
+            <div class="mt-4">
+              <span class="text-4xl font-bold">{tier.price}</span>
+              <span class="text-gray-600"> {tier.period}</span>
+            </div>
+            <p class="mt-4 text-gray-600">{tier.description}</p>
+            <ul class="mt-8 space-y-4">
+              {tier.features.map(feature => (
+                <li class="flex items-center text-gray-700">
+                  <Icon name="ph:check-circle-duotone" class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8">
+              <a href={tier.cta.href} class={`btn w-full text-center ${tier.highlighted ? 'btn-primary' : 'btn-secondary'}`}>
+                {tier.cta.text}
+              </a>
+            </div>
+          </div>
+        ))}
+
+        <!-- Enterprise Tier -->
+        <div class="bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl p-8 text-white animate-on-scroll delay-3">
+          <h3 class="text-2xl font-semibold">{pricing.enterprise.name}</h3>
+          <div class="mt-4">
+            <span class="text-2xl font-medium">{pricing.enterprise.label}</span>
+          </div>
+          <p class="mt-4 text-white/90">
+            {pricing.enterprise.description}
+          </p>
+          <ul class="mt-8 space-y-4">
+            {pricing.enterprise.features.map(feature => (
+              <li class="flex items-center">
+                <Icon name="ph:check-circle-duotone" class="h-5 w-5 text-white mr-2 flex-shrink-0" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8">
+            <a href={pricing.enterprise.cta.href} class="btn bg-white text-blue-600 hover:bg-white/90 w-full text-center">
+              {pricing.enterprise.cta.text}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold">
+          {pricing.pricingFaqSection.title}
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {pricing.pricingFaqs.map((faq, index) => (
+          <div
+            class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden animate-on-scroll hover:shadow-md transition-all duration-300"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50">
+                <h3 class="text-lg font-medium transition-colors duration-300 group-hover:text-blue-600 pr-4">{faq.question}</h3>
+                <div class="flex-shrink-0 ml-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-6 pb-6 text-gray-600">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

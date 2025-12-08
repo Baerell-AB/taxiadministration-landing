@@ -10,7 +10,7 @@ export default defineConfig({
   prefetch: true,
   i18n: {
     defaultLocale: 'sv',
-    locales: ['sv', 'en', 'ar'],
+    locales: ['sv', 'en', 'ar', 'so', 'fa'],
     routing: {
       prefixDefaultLocale: false
     }
@@ -23,7 +23,9 @@ export default defineConfig({
         locales: {
           sv: 'sv-SE',
           en: 'en-US',
-          ar: 'ar-SA'
+          ar: 'ar-SA',
+          so: 'so-SO',
+          fa: 'fa-IR'
         }
       }
     }),
