@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import logoSrc from '../assets/tk-logga.png';
 import { getLangFromUrl } from '../i18n/utils';
 import LanguageSwitcher from './LanguageSwitcher.astro';
@@ -17,7 +18,7 @@ const navItems = common.navigation.items;
 
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100" role="banner">
   <div class="container-custom flex items-center justify-between h-20">
-    <a href="/" class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded" aria-label="Taxi Administration hem">
+    <a href={getRelativeLocaleUrl(lang, '/')} class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded" aria-label="Taxi Administration hem">
       <Image src={logoSrc} alt="Taxi Administration logotyp" width={120} height={40} class="transition-all duration-300 hover:brightness-110 focus:brightness-110" />
     </a>
 
@@ -34,13 +35,15 @@ const navItems = common.navigation.items;
     </nav>
 
     <div class="flex items-center space-x-4">
-      <!-- Language Switcher -->
-      <LanguageSwitcher />
+      <!-- Language Switcher - desktop only -->
+      <div class="hidden md:block">
+        <LanguageSwitcher />
+      </div>
 
       <a href={common.navigation.appUrl} class="hidden md:inline-block text-gray-900 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded px-2 py-1">
         {common.navigation.login}
       </a>
-      <a href={common.navigation.appUrl} class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">{common.navigation.tryFree}</a>
+      <a href={common.navigation.appUrl} class="hidden md:inline-block btn btn-primary focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">{common.navigation.tryFree}</a>
 
       <!-- Mobile Menu Button -->
       <button
