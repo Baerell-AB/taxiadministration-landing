@@ -93,12 +93,92 @@ test.describe('Responsivitet', () => {
 test.describe('Footer', () => {
   test('Footer innehåller viktiga länkar', async ({ page }) => {
     await page.goto('/');
-    
+
     const footer = page.locator('footer');
     await expect(footer).toBeVisible();
-    
+
     // Kontrollera att policy-länkar finns
     await expect(footer.locator('text=Integritetspolicy')).toBeVisible();
     await expect(footer.locator('text=Användarvillkor')).toBeVisible();
+  });
+});
+
+test.describe('CTA-knappar', () => {
+  test('Huvud-CTA på startsidan är synlig', async ({ page }) => {
+    await page.goto('/');
+    const cta = page.locator('a[href*="app.taxiadministration"]').first();
+    await expect(cta).toBeVisible();
+  });
+
+  test('CTA på prissidan leder till appen', async ({ page }) => {
+    await page.goto('/priser');
+    const cta = page.locator('a[href*="app.taxiadministration"]').first();
+    await expect(cta).toBeVisible();
+    const href = await cta.getAttribute('href');
+    expect(href).toContain('app.taxiadministration.se');
+  });
+});
+
+test.describe('Kontaktsida', () => {
+  test('Kontaktformulär visas', async ({ page }) => {
+    await page.goto('/kontakt');
+    // Verifiera att kontaktformuläret finns
+    await expect(page.locator('form')).toBeVisible();
+    await expect(page.locator('input[name="name"]')).toBeVisible();
+    await expect(page.locator('input[name="email"]')).toBeVisible();
+    await expect(page.locator('textarea[name="message"]')).toBeVisible();
+  });
+});
+
+test.describe('Mobilmeny', () => {
+  test('Hamburgermeny fungerar på mobil', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+
+    // Hitta hamburgermenyn
+    const menuButton = page.locator('button[aria-label*="menu"], button[aria-label*="Menu"], .hamburger, [data-menu-toggle]').first();
+    if (await menuButton.isVisible()) {
+      await menuButton.click();
+      // Verifiera att menyn öppnas
+      await expect(page.locator('nav a:has-text("Lösningar")')).toBeVisible();
+    }
+  });
+});
+
+test.describe('Prestanda', () => {
+  test('Startsidan laddar inom 3 sekunder', async ({ page }) => {
+    const start = Date.now();
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const loadTime = Date.now() - start;
+    expect(loadTime).toBeLessThan(3000);
+  });
+});
+
+test.describe('Tillgänglighet', () => {
+  test('Bilder har alt-text', async ({ page }) => {
+    await page.goto('/');
+    const images = page.locator('img');
+    const count = await images.count();
+    for (let i = 0; i < count; i++) {
+      const alt = await images.nth(i).getAttribute('alt');
+      expect(alt, `Bild ${i + 1} saknar alt-text`).toBeTruthy();
+    }
+  });
+
+  test('Sidan har bara en h1', async ({ page }) => {
+    await page.goto('/');
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+  });
+});
+
+test.describe('Externa länkar', () => {
+  test('App-länk har korrekt href', async ({ page }) => {
+    await page.goto('/');
+    const appLink = page.locator('a[href*="app.taxiadministration.se"]').first();
+    if (await appLink.count() > 0) {
+      const href = await appLink.getAttribute('href');
+      expect(href).toMatch(/https?:\/\/app\.taxiadministration\.se/);
+    }
   });
 });
