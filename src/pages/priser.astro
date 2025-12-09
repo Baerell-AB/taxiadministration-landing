@@ -5,12 +5,94 @@ import CTASection from '../components/CTASection.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { pricing } from '../i18n/translations/sv';
 
+// Create structured data for services and pricing
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Taxi Administration - Lönehantering för taxiåkerier",
+  "description": "Automatiserad lönehantering och bokföring för taxiåkerier i Sverige. Stöd för Uber, Bolt, Taxi Stockholm.",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://taxiadministration.se/#organization",
+    "name": "Baerell AB"
+  },
+  "serviceType": "Accounting Software",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Sweden"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Prisplaner",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Gratis",
+        "description": "Perfekt för att komma igång och testa systemet. 1 förare ingår.",
+        "price": "0",
+        "priceCurrency": "SEK",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "0",
+          "priceCurrency": "SEK",
+          "unitCode": "MON",
+          "billingDuration": "P1M"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Standard",
+        "description": "För småföretag och växande åkerier. Upp till 10 förare.",
+        "price": "499",
+        "priceCurrency": "SEK",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "499",
+          "priceCurrency": "SEK",
+          "unitCode": "MON",
+          "billingDuration": "P1M"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise",
+        "description": "För större åkerier med 10+ förare och särskilda behov. Obegränsat antal förare.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "SEK",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": 10
+          }
+        }
+      }
+    ]
+  }
+};
+
+// Create FAQ schema for pricing FAQs
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": pricing.pricingFaqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
 
 <Layout
   title={pricing.seo.title}
   description={pricing.seo.description}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
   <section class="pt-20 pb-16 md:pt-28 md:pb-24">
     <div class="container-custom">
       <Breadcrumb items={pricing.header.breadcrumbs} />
