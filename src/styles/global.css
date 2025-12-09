@@ -25,7 +25,6 @@ html {
 
 body {
   @apply font-sans text-gray-900;
-  position: relative; /* For scroll progress bar */
 }
 
 /* ===== Basic Animations ===== */
@@ -58,17 +57,6 @@ body {
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-
-@keyframes ripple {
-  from {
-    transform: scale(0);
-    opacity: 0.5;
-  }
-  to {
-    transform: scale(4);
-    opacity: 0;
   }
 }
 
@@ -119,18 +107,6 @@ body {
   outline-offset: 2px;
 }
 
-.ripple-effect {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 20px;
-  height: 20px;
-  margin-top: -10px;
-  margin-left: -10px;
-  animation: ripple 0.6s linear;
-  pointer-events: none;
-}
-
 .btn-primary {
   @apply bg-blue-600 text-white hover:bg-blue-700;
 }
@@ -141,10 +117,6 @@ body {
 
 .container-custom {
   @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl;
-}
-
-.section {
-  @apply py-16 md:py-24;
 }
 
 /* ===== Cards and UI Elements ===== */
@@ -190,26 +162,6 @@ nav a:focus::after {
   width: 100%;
 }
 
-.active-nav-link {
-  @apply text-blue-600;
-}
-
-.active-nav-link::after {
-  width: 100%;
-}
-
-/* ===== Scroll Progress Bar ===== */
-.scroll-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(to right, theme('colors.blue.600'), theme('colors.blue.400'));
-  z-index: 100;
-  width: 0%;
-  transition: width 0.1s ease;
-}
-
 /* ===== FAQ Accordion Animations ===== */
 .faq-item {
   overflow: hidden;
@@ -222,21 +174,6 @@ nav a:focus::after {
 
 .faq-item summary::-webkit-details-marker {
   display: none;
-}
-
-.faq-content {
-  max-height: 0;
-  opacity: 0;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.faq-content.faq-open {
-  max-height: 500px;
-  opacity: 1;
-}
-
-.faq-summary-open {
-  @apply text-blue-600;
 }
 
 /* ===== Mobile Menu - CSS :has() approach ===== */
@@ -281,17 +218,6 @@ header:has(#menu-toggle[aria-expanded="true"]) #mobile-menu {
 
 .hover-zoom:hover img {
   transform: scale(1.05);
-}
-
-/* ===== Testimonial Card Effects ===== */
-.testimonial-card {
-  @apply bg-gray-50 rounded-xl p-8 transition-all duration-300;
-}
-
-.testimonial-card:hover,
-.testimonial-card:focus-within {
-  @apply bg-white shadow-lg;
-  transform: translateY(-5px);
 }
 
 /* ===== Focus Indicators ===== */
