@@ -137,97 +137,95 @@ const currentLocale = localeMap[lang] || 'sv-SE';
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
 
     <!-- Structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://taxiadministration.se/#organization",
-            "name": "Baerell AB",
-            "url": "https://taxiadministration.se",
-            "logo": {
+    <script type="application/ld+json" set:html={`{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://taxiadministration.se/#organization",
+          "name": "Baerell AB",
+          "url": "https://taxiadministration.se",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://taxiadministration.se/logo.png",
+            "width": 200,
+            "height": 60
+          },
+          "description": "Utvecklar digitala lösningar för svensk taxi- och transportbransch",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Stockholm",
+            "addressCountry": "SE"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/baerell/"
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://taxiadministration.se/#software",
+          "name": "Taxi Administration",
+          "description": "Automatiserad lönehantering och bokföring för taxiåkerier i Sverige. Importera kördata från Bolt, Uber, Taxi Stockholm och andra plattformar.",
+          "applicationCategory": "BusinessApplication",
+          "applicationSubCategory": "Accounting Software",
+          "operatingSystem": "Web Browser",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "url": "https://app.taxiadministration.se",
+          "downloadUrl": "https://app.taxiadministration.se/login",
+          "screenshot": [
+            {
               "@type": "ImageObject",
-              "url": "https://taxiadministration.se/logo.png",
-              "width": 200,
-              "height": 60
+              "url": "https://taxiadministration.se/salaryReport.png",
+              "caption": "Lönerapport för taxiförare"
             },
-            "description": "Utvecklar digitala lösningar för svensk taxi- och transportbransch",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Stockholm",
-              "addressCountry": "SE"
-            },
-            "sameAs": [
-              "https://www.linkedin.com/company/baerell/"
-            ]
-          },
-          {
-            "@type": "SoftwareApplication",
-            "@id": "https://taxiadministration.se/#software",
-            "name": "Taxi Administration",
-            "description": "Automatiserad lönehantering och bokföring för taxiåkerier i Sverige. Importera kördata från Bolt, Uber, Taxi Stockholm och andra plattformar.",
-            "applicationCategory": "BusinessApplication",
-            "applicationSubCategory": "Accounting Software",
-            "operatingSystem": "Web Browser",
-            "browserRequirements": "Requires JavaScript. Requires HTML5.",
-            "url": "https://app.taxiadministration.se",
-            "downloadUrl": "https://app.taxiadministration.se/login",
-            "screenshot": [
-              {
-                "@type": "ImageObject",
-                "url": "https://taxiadministration.se/salaryReport.png",
-                "caption": "Lönerapport för taxiförare"
-              },
-              {
-                "@type": "ImageObject",
-                "url": "https://taxiadministration.se/driverReport.png",
-                "caption": "Förarrapport med körstatistik"
-              }
-            ],
-            "offers": {
-              "@type": "AggregateOffer",
-              "lowPrice": "0",
-              "highPrice": "499",
-              "priceCurrency": "SEK",
-              "offerCount": "3",
-              "availability": "https://schema.org/InStock"
-            },
-            "featureList": [
-              "Automatiska löneberäkningar",
-              "Import från Uber, Bolt, Taxi Stockholm",
-              "PDF-rapporter och lönespecifikationer",
-              "Excel-export",
-              "Semesterersättning och OB-tillägg",
-              "Flerspråkigt stöd (svenska, engelska, arabiska, persiska, somaliska)",
-              "Molnbaserat - ingen installation krävs"
-            ],
-            "softwareVersion": "2.0",
-            "releaseNotes": "https://taxiadministration.se/blog",
-            "creator": {
-              "@id": "https://taxiadministration.se/#organization"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "ratingCount": "25",
-              "bestRating": "5",
-              "worstRating": "1"
+            {
+              "@type": "ImageObject",
+              "url": "https://taxiadministration.se/driverReport.png",
+              "caption": "Förarrapport med körstatistik"
             }
+          ],
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "0",
+            "highPrice": "499",
+            "priceCurrency": "SEK",
+            "offerCount": "3",
+            "availability": "https://schema.org/InStock"
           },
-          {
-            "@type": "WebSite",
-            "@id": "https://taxiadministration.se/#website",
-            "url": "https://taxiadministration.se",
-            "name": "Taxi Administration",
-            "publisher": {
-              "@id": "https://taxiadministration.se/#organization"
-            },
-            "inLanguage": currentLocale
+          "featureList": [
+            "Automatiska löneberäkningar",
+            "Import från Uber, Bolt, Taxi Stockholm",
+            "PDF-rapporter och lönespecifikationer",
+            "Excel-export",
+            "Semesterersättning och OB-tillägg",
+            "Flerspråkigt stöd (svenska, engelska, arabiska, persiska, somaliska)",
+            "Molnbaserat - ingen installation krävs"
+          ],
+          "softwareVersion": "2.0",
+          "releaseNotes": "https://taxiadministration.se/blog",
+          "creator": {
+            "@id": "https://taxiadministration.se/#organization"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "25",
+            "bestRating": "5",
+            "worstRating": "1"
           }
-        ]
-      }
-    </script>
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://taxiadministration.se/#website",
+          "url": "https://taxiadministration.se",
+          "name": "Taxi Administration",
+          "publisher": {
+            "@id": "https://taxiadministration.se/#organization"
+          },
+          "inLanguage": "${currentLocale}"
+        }
+      ]
+    }`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
