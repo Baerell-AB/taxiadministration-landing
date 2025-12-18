@@ -5,8 +5,9 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 import { blog } from '../../i18n/translations/fa';
 
+const now = new Date();
 const allBlogPosts = await getCollection('blog', ({ data }) => {
-  return data.locale === 'fa';
+  return data.locale === 'fa' && new Date(data.date) <= now;
 });
 // Sort by date (newest first)
 const sortedPosts = allBlogPosts.sort((a, b) => {
