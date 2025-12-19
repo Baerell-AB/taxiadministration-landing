@@ -5,9 +5,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 import { blog } from '../i18n/translations/sv';
 
-const now = new Date();
 const allBlogPosts = await getCollection('blog', ({ data }) => {
-  return data.locale === 'sv' && new Date(data.date) <= now;
+  return data.locale === 'sv';
 });
 // Sort by date (newest first)
 const sortedPosts = allBlogPosts.sort((a, b) => {
@@ -39,8 +38,9 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post, index) => (
           <article
-            class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden animate-on-scroll border border-gray-100 group"
+            class="blog-post bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden animate-on-scroll border border-gray-100 group hidden"
             style={`animation-delay: ${index * 0.1}s`}
+            data-date={post.data.date}
           >
             <a href={`/blog/${post.id}`} class="block">
               {post.data.image && (
@@ -97,3 +97,15 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
 
   <CTASection />
 </Layout>
+
+<script>
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  document.querySelectorAll('.blog-post').forEach(post => {
+    const postDate = new Date(post.getAttribute('data-date') + 'T00:00:00');
+    if (postDate <= today) {
+      post.classList.remove('hidden');
+    }
+  });
+</script>
