@@ -2,9 +2,54 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { languages } from '../i18n/config';
 
-// Get current path without language prefix
 const currentPath = Astro.url.pathname;
+const currentLocale = Astro.currentLocale || 'sv';
+
+// Route mapping: svenska slug -> internationell slug
+const routeMapping: Record<string, string> = {
+  'om-oss': 'about',
+  'losningar': 'solutions',
+  'priser': 'pricing',
+  'kontakt': 'contact',
+  'partners': 'partners',
+  'blog': 'blog',
+};
+
+// Omvänd mapping för att gå från internationell till svenska
+const reverseMapping = Object.fromEntries(
+  Object.entries(routeMapping).map(([sv, intl]) => [intl, sv])
+);
+
+// Extrahera path utan locale
 const pathWithoutLocale = currentPath.replace(/^\/(en|ar|so|fa)/, '') || '/';
+const pathSegments = pathWithoutLocale.split('/').filter(Boolean);
+const currentSlug = pathSegments[0] || '';
+
+function getLocalizedPath(targetLocale: string): string {
+  if (pathWithoutLocale === '/' || pathWithoutLocale === '') {
+    return getRelativeLocaleUrl(targetLocale, '/');
+  }
+
+  let targetSlug = currentSlug;
+
+  if (currentLocale === 'sv') {
+    // Från svenska till annat språk
+    if (targetLocale !== 'sv' && routeMapping[currentSlug]) {
+      targetSlug = routeMapping[currentSlug];
+    }
+  } else {
+    // Från annat språk till svenska
+    if (targetLocale === 'sv' && reverseMapping[currentSlug]) {
+      targetSlug = reverseMapping[currentSlug];
+    }
+    // Från annat språk till annat språk (behåll samma slug)
+  }
+
+  const restPath = pathSegments.slice(1).join('/');
+  const newPath = restPath ? `/${targetSlug}/${restPath}` : `/${targetSlug}`;
+
+  return getRelativeLocaleUrl(targetLocale, newPath);
+}
 
 // Language configuration with flags
 const languageConfig = {
@@ -34,8 +79,6 @@ const languageConfig = {
     code: 'fa'
   }
 };
-
-const currentLocale = Astro.currentLocale || 'sv';
 ---
 
 <!-- Desktop Language Switcher -->
@@ -57,7 +100,7 @@ const currentLocale = Astro.currentLocale || 'sv';
   <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
     <div class="py-1">
       {Object.entries(languageConfig).map(([locale, config]) => {
-        const url = getRelativeLocaleUrl(locale, pathWithoutLocale);
+        const url = getLocalizedPath(locale);
         const isActive = currentLocale === locale;
 
         return (
@@ -99,7 +142,7 @@ const currentLocale = Astro.currentLocale || 'sv';
 
     <div class="py-1">
       {Object.entries(languageConfig).map(([locale, config]) => {
-        const url = getRelativeLocaleUrl(locale, pathWithoutLocale);
+        const url = getLocalizedPath(locale);
         const isActive = currentLocale === locale;
 
         return (
