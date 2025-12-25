@@ -9,7 +9,7 @@ export const header = {
     { name: 'الرئيسية', url: 'https://taxiadministration.se/ar/' },
     { name: 'من نحن', url: 'https://taxiadministration.se/ar/about/' },
   ],
-  title: 'حول taxiadministration.se',
+  title: 'من نحن',
   subtitle: 'نساعد شركات سيارات الأجرة السويدية على أتمتة إدارتها وتوفير الوقت الثمين.',
 };
 

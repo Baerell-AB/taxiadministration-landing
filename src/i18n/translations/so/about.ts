@@ -9,7 +9,7 @@ export const header = {
     { name: 'Guriga', url: 'https://taxiadministration.se/so/' },
     { name: 'Naga', url: 'https://taxiadministration.se/so/about/' },
   ],
-  title: 'Ku saabsan taxiadministration.se',
+  title: 'Ku saabsan',
   subtitle: 'Waxaan caawinna shirkadaha taksiiga Iswiidhan inay automatigoobiyaan maamuladooda oo badbaadiyaan waqti qaalisan.',
 };
 

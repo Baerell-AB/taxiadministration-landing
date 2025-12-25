@@ -58,6 +58,9 @@ const navItems = common.navigation.items;
   <!-- Mobile Menu -->
   <nav id="mobile-menu" class="bg-white w-full border-t border-gray-100" role="navigation" aria-label="Mobilnavigation">
     <div class="container-custom py-4 space-y-4">
+      <!-- Mobile Language Switcher - högst upp för enkel åtkomst -->
+      <LanguageSwitcher />
+
       {navItems.map((item, index) => (
         <a
           href={item.href}
@@ -69,9 +72,6 @@ const navItems = common.navigation.items;
       ))}
       <a href={common.navigation.appUrl} class="block py-2 px-2 text-gray-700 hover:text-blue-600 focus:text-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded">{common.navigation.login}</a>
       <a href={common.navigation.appUrl} class="btn btn-primary w-full text-center mt-4">{common.navigation.tryFree}</a>
-
-      <!-- Mobile Language Switcher -->
-      <LanguageSwitcher />
     </div>
   </nav>
 </header>
@@ -79,10 +79,33 @@ const navItems = common.navigation.items;
 <script>
   document.addEventListener('astro:page-load', () => {
     const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Reset menu state on page load (important for View Transitions)
+    menuToggle?.setAttribute('aria-expanded', 'false');
+
+    // Close all details elements in mobile menu
+    mobileMenu?.querySelectorAll('details[open]').forEach(d => d.removeAttribute('open'));
+
     menuToggle?.addEventListener('click', () => {
       const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
       menuToggle.setAttribute('aria-expanded', String(!isExpanded));
       menuToggle.setAttribute('aria-label', !isExpanded ? 'Stäng meny' : 'Öppna meny');
+    });
+
+    // Close menu when a link in mobile menu is clicked
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.focus();
+      }
     });
   });
 </script>

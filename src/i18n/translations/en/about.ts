@@ -9,7 +9,7 @@ export const header = {
     { name: 'Home', url: 'https://taxiadministration.se/en/' },
     { name: 'About us', url: 'https://taxiadministration.se/en/about/' },
   ],
-  title: 'About taxiadministration.se',
+  title: 'About us',
   subtitle: 'We help Swedish taxi companies automate their administration and save valuable time.',
 };
 
